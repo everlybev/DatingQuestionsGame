@@ -7,231 +7,183 @@ from pymediainfo import MediaInfo
 import subprocess
 import secrets
 import psutil
-# def get_list_of_contents(filename):
-#     file = open(filename, 'r')
-#     contents = file.readlines()
-#     file.close()
-#     real_list = []
-#     for content in contents:
-#         real_list.append(content.replace('\n', '').strip())
-#     return real_list
-# def check_categories():
-#     dataframe = pd.read_csv('porn.csv', delimiter=',', header=0,
-#                                         skip_blank_lines=True, na_values='')
-#     for index in dataframe.index:
-#         if index == 0:
-#             list_of_pornstars = dataframe['Pornstars'][index]
-#             list_of_genres = dataframe['Genres'][index]
-#             list_of_ethnicities = dataframe['Ethnicities'][index]
-#         else:
-#             if type(dataframe['Pornstars'][index]) != type(3.3):
-#                 list_of_pornstars = list_of_pornstars + '; ' + dataframe['Pornstars'][index]
-#             if type(dataframe['Genres'][index]) != type(3.2):
-#                 list_of_genres = list_of_genres + '; ' +  dataframe['Genres'][index]
-#             try:
-#                 list_of_ethnicities = list_of_ethnicities + '; ' + dataframe['Ethnicities'][index]
-#             except:
-#                 pass
-#     list_of_pornstars = list_of_pornstars.split('; ')
-#     list_of_genres = list_of_genres.split('; ')
-#     list_of_ethnicities = list_of_ethnicities.split('; ')
-#     selflist_of_pornstars = get_list_of_contents('Pornstars.txt')
-#     selflist_of_genres = get_list_of_contents('Genres.txt')
-#     selflist_of_ethnicities = get_list_of_contents('Ethnicities.txt')
-#     p_test = False
-#     g_test = False
-#     e_test = False
-#     for thing in list_of_pornstars:
-#         if thing.strip() not in selflist_of_pornstars:
-#             print(thing.strip() + ' was not in the pornstar list')
-#             p_test = True
-#             selflist_of_pornstars.append(thing.strip())
-#     for thing in list_of_genres:
-#         if thing.strip() not in selflist_of_genres:
-#             g_test = True
-#             print(thing.strip() + ' was not in the genre list')
-#             selflist_of_genres.append(thing.strip())
-#     for thing in list_of_ethnicities:
-#         if thing.strip() not in selflist_of_ethnicities:
-#             e_test = True
-#             print(thing.strip() + ' was not in the ethnicity list')
-#             selflist_of_ethnicities.append(thing.strip())
-#     selflist_of_ethnicities.sort(key=str.lower)
-#     selflist_of_genres.sort(key=str.lower)
-#     selflist_of_pornstars.sort(key=str.lower)
-#     if g_test:
-#         file_name = open('Genres_.txt', 'w')
-#         for i in selflist_of_genres:
-#             file_name.write(i+'\n')
-#         file_name.close()
-#     if p_test:
-#         file_name = open('Pornstars_.txt', 'w')
-#         for i in selflist_of_pornstars:
-#             file_name.write(i+'\n')
-#         file_name.close()
-#     if e_test:
-#         file_name = open('Ethnicities_.txt', 'w')
-#         for i in selflist_of_ethnicities:
-#             file_name.write(i+'\n')
-#         file_name.close()
-#     exit()
-# check_categories()
 from tkinter import Label
 from tkinter import Tk
 from Widgets import Label_Widget
 from Widgets import Listbox_widget
 import shutil
 from PIL import Image, ImageTk
-# from cv2 import VideoCapture
 from cv2 import imwrite
 from cv2 import CAP_PROP_FPS
 from cv2 import CAP_PROP_POS_FRAMES
-# from keras.preprocessing.image import ImageDataGenerator
-# from keras.models import Sequential
-# from keras.layers import Conv2D, MaxPooling2D
-# from keras.layers import Activation, Dropout, Flatten, Dense
-# from keras import backend as K
-# import numpy as np
-# from keras.preprocessing import image
-# from keras import models
-# from keras.layers import LeakyReLU
 
 class BackendFuncs:
-    def __init__(self, root_path, the_csv,
-                 porntxt='Pornstars.txt', genretxt='Genres.txt', ethnicitytxt='Ethnicities.txt',
-                 do_initial=False, do_everything=True,
-                 w=6, h=9, make_window=False):
-        if make_window:
-            pass
-        if do_everything:
-            self.viewing_unupdated = False
-            self.porntxt = porntxt
-            self.genretxt = genretxt
-            self.ethnicitytxt = ethnicitytxt
-            self.root_path = root_path
-            self.write_to_log('the root path' + str(root_path))
-            self.the_csv = the_csv
-            self.sorting_revese = False
-            for txtfile in [self.porntxt, self.genretxt, self.ethnicitytxt]:
-                self.replace_text_in_textfile(txtfile, '\n\n', '\n')
-                self.alphabatize_txt_list(txtfile)
-            self.list_of_pornstars = self.get_list_of_contents(self.porntxt)
-            self.list_of_pornstars.sort(key=str.lower)
-            self.list_of_genres = self.get_list_of_contents(self.genretxt)
-            self.list_of_genres.sort(key=str.lower)
-            self.list_of_ethnicities = self.get_list_of_contents(self.ethnicitytxt)
-            self.list_of_ethnicities.sort(key=str.lower)
-            self.dataframe = pd.read_csv(self.the_csv, delimiter=',', header=0,
-                                        skip_blank_lines=True, na_values='')
-            if do_initial:
-                self.initial_update()
-            if self.list_of_filez_from_dataframe(self.dataframe) == []:
-                #csv file is empty
-                self.update_csv(self.get_all_videos_from_root(self.root_path), self.the_csv)
-                self.dataframe = pd.read_csv(self.the_csv, delimiter=',', header=0,
-                                        skip_blank_lines=True, na_values='')
-            self.dataframe.replace(float('nan'), '')
-            self.dataframe.replace(',nan,', '')
-            self.dataframe.replace('NaN', '')
-            self.dataframe.replace('NAN', '')
-            self.dataframe.replace('; nan ;', '')
-            self.dataframe.replace(',nan ;', '')
-            self.dataframe.replace('; nan,', '')
-            self.dataframe = self.dataframe.drop_duplicates()
-            self.dataframe.to_csv(self.the_csv, index=False)
-            self.filtereddataframe = pd.read_csv(self.the_csv, delimiter=',', header=0,
-                                        skip_blank_lines=True, na_values='')
-            self.filtereddataframe.replace(float('nan'), '')
-            self.filtereddataframe.replace(',nan,', '')
-            self.dataframe['Ethnicities'] = self.dataframe['Ethnicities'].astype(str)
-            self.filtereddataframe['Ethnicities'] = self.filtereddataframe['Ethnicities'].astype(str)
-            self.dataframe['Genres'] = self.dataframe['Genres'].astype(str)
-            self.filtereddataframe['Genres'] = self.filtereddataframe['Genres'].astype(str)
-            self.dataframe['Pornstars'] = self.dataframe['Pornstars'].astype(str)
-            self.filtereddataframe['Pornstars'] = self.filtereddataframe['Pornstars'].astype(str)
-            self.dataframe['Animated'] = self.dataframe['Animated'].astype(str)
-            self.filtereddataframe['Animated'] = self.filtereddataframe['Animated'].astype(str)
-            self.dataframe['Duration'] = self.dataframe['Duration'].astype(float)
-            self.filtereddataframe['Duration'] = self.filtereddataframe['Duration'].astype(float)
-            self.filtereddataframe = self.filtereddataframe.drop_duplicates(subset=['Path', 'Filename',
-                                                                                    'Pornstars', 'Ethnicities',
-                                                                                    'Genres', 'Duration'])
-            self.desired_genres = []
-            self.desired_pornstars = []
-            self.undesired_genres = []
-            self.undesired_pornstars = []
-            self.desired_ethnicities = []
-            self.undesired_ethnicities = []
-            self.selections = ['Pornstar', 'Ethnicity', 'Genre']
-            self.animatedselections = ['Pornstar', 'Ethnicity', 'Genre']
-            self.selection = self.selections[self.generate_random_integer(0, len(self.selections)-1)]#'Pornstar'
-            self.desired_or_undesired_options = ['Desired', 'Undesired']
-            self.desired_or_undesired = self.desired_or_undesired_options[self.generate_random_integer(0,
-                                                                                                    len(self.desired_or_undesired_options)-1)
-                                                                                                    ]#'Desired'
-            self.hours = 0
-            self.minutes = 0
-            self.seconds = 0 #seconds
-            self.minutes_overflows = 0
-            self.hours_overflows = 0
-            self.hours_overflowm = 0
-            self.duration = ((self.hours+self.hours_overflowm+self.hours_overflows) * 60 *60)
-            self.duration = self.duration + ((self.minutes+self.minutes_overflows) * 60)
-            self.duration = self.duration + self.seconds
-            self.comparator = '>='
-            self.animated = ''
-            self.filename = ''
-            self.path_in_filter = root_path
-            self.upper_duration = 45510
-            self.lower_duration = 1
-            self.lower_comparator = '>='
-            self.upper_comparator = '<='
-            self.range_selected = False
-            self.details_root = 11037
-            self.filters_root = 11037
-            self.video_completeness = 'incomplete/complete'
-            self.allowed = [
-                'Aussie',
-                'Rimming',
-                'Gangbang',
-                'Hentai',
-                'Harem',
-                'Interracial',
-                'Orgy',
-                'Anal',
-                'Lesbian',
-                'Tranny',
-                'Blow Job',
-                '3d CGI',
-                'BDSM or Bondage',
-                'Loli',
-                'Horny Slut',
-                'Amateur',
-                'JAV',
-                'Trans With Girl',
-                'Trans With Male',
-                'Trans With Trans',
-                'TTM',
-                'TTF',
-                'TFF',
-                'TFM',
-                'TMM',
-                'Threesome',
-                'Male Present',
-                'Ugly Bastard',
-                'School Girl',
-                'Face Fuck'
-            ]
-            self.total_porn_hours = round((self.dataframe['Duration'].sum()) / 3600, 2)
-            self.filtered_porn_hours = round((self.filtereddataframe['Duration'].sum()) / 3600, 2)
-            self.total_unwatched_porn_hours = round((self.get_unwatched_porn_hours()) / 3600, 2)
-            self.total_watched_porn_hours = round(self.total_porn_hours - self.total_unwatched_porn_hours, 2)
-            self.total_file_size = round(self.get_folder_size(self.root_path)/1073741824, 2)
-            self.write_to_log('{}, {}, {}, {}, {}'.format(self.total_porn_hours, 
-                                                          self.filtered_porn_hours,
-                                                          self.total_watched_porn_hours, 
-                                                          self.total_unwatched_porn_hours, 
-                                                          self.total_file_size))
+    def __init__(self):
+        self.questions = [
+            'What is one thing you have always wanted to try in the bedroom but have not told me?',
+            'Where is the most adventurous place you wouldd like to make love?',
+            'What is a secret fantasy you have never shared with anyone?',
+            'How do you feel about role play, and what scenario intrigues you?',
+            'What is the naughtiest thought you have had about us?',
+            'Is there a type of clothing you would love to see me wear?',
+            'What is one thing that I do that drives you wild without fail?',
+            'Have you ever fantasized about us while you were alone?',
+            'What is your favorite memory of us that turns you on just thinking about it?',
+            'How do you feel about public displays of affection?',
+            'What is something new you would like to explore together?',
+            'How important is experimentation in our intimate life to you?',
+            'What is the most sensitive part of your body?',
+            'How do you feel about dirty talk, and could we incorporate more of it?',
+            'What is a movie or book scene that you find incredibly erotic?',
+            'Have you ever had a dream about us that you have not shared?',
+            'What kind of touch do you crave the most?',
+            'Is there a song that makes you think about being intimate with me?',
+            'How do you feel about taking our intimacy outside the bedroom?',
+            'What is the most daring thing you have ever wanted to do with me?',
+            'What is something you find incredibly attractive about me that I would never guess?',
+            'How do you feel about making out in public?',
+            'What is one thing I do that makes your heart skip a beat?',
+            'If we could teleport anywhere right now, just for a kiss, where would we go?',
+            'What kind of outfit would you love to see me in?',
+            'What is a romantic fantasy you have always had?',
+            'When did you first realize you were attracted to me?',
+            'What is your favorite pet name',
+            'How do you feel about cuddling on the couch vs. cuddling in bed?',
+            'What is the most romantic date you can imagine?',
+            'If you could describe our chemistry in one word, what would it be?',
+            'What is something flirty you have wanted to say to me but have not yet?',
+            'How would you react if I whispered something naughty in your ear in public?',
+            'What is one thing I do that unexpectedly turns you on?',
+            'If we had a whole day to ourselves, no interruptions, what would we do?',
+            'Describe the most passionate kiss you have ever imagined us having.',
+            'What is a small act of affection you find incredibly sexy?',
+            'How do you feel about holding hands in public?',
+            'What is one thing you wish we would done sooner in our relationship?',
+            'If you could have any superpower when with me, what would it be?',
+            'What is the most embarrassing thing you have done around me, hoping I did not notice?',
+            'If we were animals, what would we be and why?',
+            'What is the silliest reason you have ever gotten into a laugh with me?',
+            'If you could prank me without repercussions, what would you do?',
+            'What movie title best describes our relationship?',
+            'What is the funniest thing you have ever seen me do?', 
+            'If we could have a theme song, what would it be?',
+            'What is the weirdest dream you have had about us?',
+            'If we were in a food fight, what would be your weapon of choice?',
+            'What is a goofy habit of mine that you secretly love?',
+            'If we could switch lives for a day, what is the first thing you would do?',
+            'What is something you do better than me, and vice versa?',
+            'If we were stranded on a deserted island, what role would each of us play?',
+            'What is the most bizarre gift you have ever thought about giving me?',
+            'If we made a sitcom about our lives, what would it be called?',
+            'What is a hobby you would love us to try together but think I would never go for?',
+            'If we were superheroes, what powers would complement each other the best?',
+            'If you could invent a holiday for us, what would it celebrate?',
+            'What experience has shaped you most in life, and why?',
+            'What was your most profound moment of vulnerability, and what did it teach you?',
+            'How do you define love, and do you believe it evolves?',
+            'What is a fear you have overcome, and how did you do it?',
+            'What do you dream about achieving the most, and why?',
+            'What was a turning point in your life, and how did it change you?',
+            'What is something you have always wanted to tell me but have not found the right moment?',
+            'What does trust mean to you in a relationship?',
+            'How do you see our future together, and what are your aspirations for us?',
+            'What is a lesson from a past relationship that you have brought into ours?',
+            'What are your thoughts on forgiveness and second chances in love?',
+            'How do you maintain your sense of self while being deeply connected to someone else?'
+            # 'What’s something you’ve learned about yourself from being with me?
+            # 'How do you express love, and in what ways do you prefer to receive it?
+            # 'What’s a dream you’ve yet to achieve, and how can I support you in it?
+            # 'If you could change one aspect of our relationship, what would it be and why?
+            # 'How do you envision our life together in 10 years?
+            # 'How do you define happiness, and do you think it’s achievable?
+            # 'How do you reconcile the existence of good and evil in the world?
+            # 'What role does love play in the universe?
+            # 'How do you balance the need for individual freedom with the importance of community?
+            # 'How do you define success, and is it subjective or universal?
+            # 'What does it mean to live a good life?
+            # 'How important is it to leave a legacy, and what kind do you want to leave?
+            # 'Do you believe in the concept of a parallel universe or alternate realities?
+            # 'What’s the role of art and creativity in society?
+            # 'Is there such a thing as absolute truth, or is everything relative?
+            # 'If you could travel to any point back in time, what year would you choose and why?
+            # 'What are a few things at the top of your bucket list? 
+            # 'What decision do you look back on and say, “What was I thinking?”
+            # 'If you could give your 16-year-old self one piece of advice, what would it be? Would you have listened?
+            # 'Who is/was the most influential person in your life?
+            # 'What is the first thing you would do if you won the mega millions lottery? 
+            # 'What is the weirdest dream you’ve ever had?
+            # 'What is the most embarrassing thing you’ve done in public?
+            # 'Would you consider yourself adventurous, or do you play it on the safe side?
+            # 'What would you title this chapter of your life?
+            # 'If you could re-live any part of your life so far, which part would you choose and why?
+            # 'What is the biggest lesson you learned from your teens/twenties?
+            # 'Who would you want to sit next to on a ten-hour flight across the world (aside from self.signifigant_other), and why?
+            # 'If you could be any kind of dog, what breed would you be? 
+            # 'Do you think the convenience of the internet is worth the loss of privacy that comes with it?
+            # 'If you found out that your current life has been only a dream, would you choose to wake up or stay in it? 
+            # 'What are three non-negotiable traits you want in a partner? 
+            # 'What have you always dreamed someone would do for you? 
+            # 'What is your idea of the perfect relationship?
+            # 'Do you believe opposites attract? 
+            # 'What is a common relationship belief that you don’t agree with?
+            # 'Aside from common pet names such as babe, sweethert, hun, etc. what is a pet name you would like to exclusively call {}?'.format(self.signifigant_other)
+            # 'What quirky habit do you have that no one knows about?
+            # 'How would you want to spend a one-week vacation with your lover?
+            # 'What brings you the most joy in life?
+            # 'What part of yourself have you learned to accept?
+            # 'Imagine you’re dating the most attractive person in the world, but your family doesn’t like them. Would you stay with them? Why or why not? 
+            # 'How important is humor for you in a relationship?
+            # 'What is your definition of a healthy relationship?
+            # 'What was your first impression of me? 
+            # 'When looking at someone you’re attracted to, where do your eyes go first?
+            # 'How old were you when you had your first kiss?
+            # 'What is the most spontaneous thing you’ve ever done?
+            # 'What is your biggest regret?
+            # 'If you could live someone else’s life for a day, who would you choose?
+            # 'What do you consider the most romantic travel destination in the world?
+            # 'What is your biggest fear when it comes to relationships?
+            # 'Romantic lunch picnic in the park or a high-class dinner and cocktails? 
+            # 'What’s your biggest turn-on?
+            # 'Do you prefer cuddling or kissing?
+            # 'Have you ever had a crush on a teacher or someone much older (5+ years) than you?
+            # 'Love or money?
+            # 'What is the shortest and longest relationship you’ve ever had? 
+            # 'What is the craziest thing you’ve ever seen someone do for love?
+            # 'What is a relationship deal breaker?
+            # 'What is your favorite thing about me?
+            # 'What do you think is my favorite thing about you?
+            # 'What sets you apart from other people? 
+            # 'What do you think sets me apart from other people?
+            # 'What is your favorite childhood memory? 
+            # 'Have you ever skinny dipped with a group?
+            # 'Do you think you're a good kisser?''
+            # 'Where do you like being touched the most?
+            # 'Is there anywhere you would like to be kissed more often aside from the lips'
+            # 'How old were you when you lost your virginity?
+            # 'Where is the strangest place you've ever had sex?
+            # 'Where would you love to have sex?
+            # 'What turns you on almost instantly?
+            # 'How do you feel about bringing toys into the bedroom?
+            # 'Have you ever bragged to your friends about me?
+            # 'Have you ever been to a strip club?
+            # 'What kind of talk do you like, if any, in bed?
+            # 'Have you ever had a dream about me?
+            # 'Have you ever kissed me in public just to make someone jealous?
+            # 'Hickies: major yes or no way?
+            # 'What is a fantasy you've never shared with anyone?
+
+        ]
+        self.BF_score = 0
+        self.GF_score = 0
+        self.current_turn = self.generate_random_integer(0, 1)
+        self.rulez = '1. Players must alternate turns.  The first player will be determined at random.\n'
+        self.rulez = self.rulez + '2. This is meant to build your relationship.  As such all answers MUST be made while holding hands '
+        self.rulez = self.rulez + 'and making full eye contact.\n'
+        self.rulez = self.rulez + '3. Players can use their skips whenever they choose as long as they have skips.\n'
+        self.rulez = self.rulez + '4. Players can accrue skips at a rate of 1 skip per 5 answered questions.\n'
+        self.rulez = self.rulez + '5. Skips can be bought by giving your partner a passionate kiss if it is your turn.\n'
+        self.rulez = self.rulez + '6. Skips can be bought after answering 3 questions.\n'
+        self.rulez = self.rulez + '7. A player may only hold 3 skips at once.'
             #exit()
     
     def alphabatize_txt_list(self, text_doc_name, new_text_doc_name=False):
