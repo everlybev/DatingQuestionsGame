@@ -24,8 +24,8 @@ class BackendFuncs:
         self.questions = [
             'What is one thing you have always wanted to try in the bedroom but have not told me?',
             'If money was no object would you want a grand wedding or something small?  Explain.',
-            'How long should you date a person at minimum before getting married?'
-            'What do you think is my favorite thing about you?'
+            'How long should you date a person at minimum before getting married?',
+            'What do you think is my favorite thing about you?',
             'Where is the most adventurous place you wouldd like to make love?',
             'What is a secret fantasy you have never shared with anyone?',
             'How do you feel about role play, and what scenario intrigues you?',
@@ -53,7 +53,7 @@ class BackendFuncs:
             'What kind of outfit would you love to see me in?',
             'What is a romantic fantasy you have always had?',
             'When did you first realize you were attracted to me?',
-            'What is your favorite pet name',
+            'What is your favorite pet name?',
             'How do you feel about cuddling on the couch vs. cuddling in bed?',
             'What is the most romantic date you can imagine?',
             'If you could describe our chemistry in one word, what would it be?',
@@ -229,6 +229,7 @@ class BackendFuncs:
                 print(question)
                 question = question.replace(' me ', ' '+self.players[self.other_player_index][0]+' ')
                 question = question.replace(' me.', ' '+self.players[self.other_player_index][0]+'.')
+                question = question.replace(' me,', ' '+self.players[self.other_player_index][0]+',')
                 question = question.replace(' me?', ' '+self.players[self.other_player_index][0]+'?')
                 question = question.replace(' me!', ' '+self.players[self.other_player_index][0]+'!')
                 question = question.replace(' my ', ' '+self.players[self.other_player_index][0]+"'s ")
