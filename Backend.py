@@ -1,4 +1,4 @@
-import pandas as pd
+#import pandas as pd
 from datetime import datetime
 import os
 #import json
@@ -2942,114 +2942,114 @@ class BackendFuncs:
             genres = genres + '; ' + 'Anal'
         return genres
 
-    def update_dataframe(self, old_frame, the_path, filename, extension, dur):
-        if (the_path.__contains__('\\H')) and ((the_path.__contains__('\\old')) or (the_path.__contains__('\\new')) or (the_path.__contains__('\\dl')) or (the_path.__contains__('\\Mimia Cute'))):
-            animation = 'True'
-        else:
-            animation = 'False'
-        if (the_path.__contains__('\\H')) and ((the_path.__contains__('\\old')) or (the_path.__contains__('\\new')) or (the_path.__contains__('\\dl')) or (the_path.__contains__('\\Mimia Cute'))):
-            genre = 'Hentai'
-        else:
-            genre = ''
-        genre = self.add_general_genres(genre, os.path.join(the_path, filename))
-        pornstars = '11037'
-        filename = os.path.join(the_path, filename)
-        if filename.lower().__contains__('Office Ms Conduct'.lower()):
-            conduct_pornstars = self.get_list_of_contents('OfficeMsConduct.txt')
-            conduct_pornstars.sort(key=str.lower)
-            pornstars = '11037'
-            for line in conduct_pornstars:
-                star = line.replace('\n', '')
-                if pornstars == '11037':
-                    pornstars = pornstars + star
-                else:
-                    pornstars = pornstars + '; ' + star
-        elif filename.lower().__contains__('Trans Lesbians'.lower()):
-            conduct_pornstars = self.get_list_of_contents('Trans Lesbians.txt')
-            conduct_pornstars.sort(key=str.lower)
-            pornstars = '11037'
-            for line in conduct_pornstars:
-                star = line.replace('\n', '')
-                if pornstars == '11037':
-                    pornstars = pornstars + star
-                else:
-                    pornstars = pornstars + '; ' + star
-        elif filename.lower().__contains__('The Gift.'.lower()):
-            self.write_to_log('filename to update is The Gift')
-            conduct_pornstars = self.get_list_of_contents('The Gift.txt')
-            conduct_pornstars.sort(key=str.lower)
-            pornstars = '11037'
-            self.write_to_log('pornstars are {}'.format(conduct_pornstars))
-            for line in conduct_pornstars:
-                star = line.replace('\n', '')
-                if pornstars == '11037':
-                    pornstars = pornstars + star
-                else:
-                    pornstars = pornstars + '; ' + star
-        elif filename.lower().__contains__('The Oral Experiment'.lower()):
-            conduct_pornstars = self.get_list_of_contents('Oral Experiment.txt')
-            conduct_pornstars.sort(key=str.lower)
-            pornstars = '11037'
-            for line in conduct_pornstars:
-                star = line.replace('\n', '')
-                if pornstars == '11037':
-                    pornstars = pornstars + star
-                else:
-                    pornstars = pornstars + '; ' + star
-        elif filename.lower().__contains__('Too Hot For Teacher'.lower()):
-            conduct_pornstars = self.get_list_of_contents('Hot for Teach.txt')
-            conduct_pornstars.sort(key=str.lower)
-            pornstars = '11037'
-            for line in conduct_pornstars:
-                star = line.replace('\n', '')
-                if pornstars == '11037':
-                    pornstars = pornstars + star
-                else:
-                    pornstars = pornstars + '; ' + star
-        else:
-            for star in self.list_of_pornstars:
-                star = star.replace('\n', '')
-                pornstar = star.lower().strip()
-                if filename.lower().__contains__(pornstar):
-                    if pornstars == '11037':
-                        pornstars = pornstars + star
-                    else:
-                        if star.__contains__(' '):
-                            first_name = star.split(' ')[0]
-                        else:
-                            first_name = star
-                        if not (pornstars.__contains__(first_name)):
-                            pornstars = pornstars + '; ' + star
-                        else:
-                            #some pornstar first names are repeated
-                            if pornstars.__contains__('11037' + first_name + '; '): #first name in list of pornstars
-                                pornstars = pornstars.replace(first_name + '; ', star + '; ')
-                            elif (pornstars.__contains__('11037' + first_name)) and not (pornstars.__contains__(' ')): #Only name in list of pornstars
-                                pornstars = pornstars.replace(first_name, star)
-                            elif pornstars.__contains__('; ' + first_name + ';'): #middle in list of pornstars
-                                pornstars = pornstars.replace('; ' + first_name, '; ' + star)
-                            elif pornstars.__contains__('; ' + first_name): #Last name in list of pornstars
-                                pornstars = pornstars.replace('; ' + first_name, '; ' + star)
-                            else:
-                                pornstars = pornstars + '; ' + star
-        pornstars = pornstars.replace('11037', '')
-        the_path, filename = os.path.split(filename)
-        update_dic = {
-                        'Path': [the_path],
-                        'Filename': [filename],
-                        'Filetype': [extension],
-                        'Animated': [animation],
-                        'Pornstars': [pornstars],
-                        'Ethnicities': [''],
-                        'Genres': [genre],
-                        'Duration': [dur]
-                        }
-        new_df = pd.DataFrame(update_dic)
-        dataframe = pd.concat([old_frame, new_df], ignore_index = True)
-        dataframe.replace(float('nan'), '')
-        dataframe.replace(',nan,', '')
-        self.write_to_log(os.path.join(the_path, filename))
-        return dataframe
+    # def update_dataframe(self, old_frame, the_path, filename, extension, dur):
+    #     if (the_path.__contains__('\\H')) and ((the_path.__contains__('\\old')) or (the_path.__contains__('\\new')) or (the_path.__contains__('\\dl')) or (the_path.__contains__('\\Mimia Cute'))):
+    #         animation = 'True'
+    #     else:
+    #         animation = 'False'
+    #     if (the_path.__contains__('\\H')) and ((the_path.__contains__('\\old')) or (the_path.__contains__('\\new')) or (the_path.__contains__('\\dl')) or (the_path.__contains__('\\Mimia Cute'))):
+    #         genre = 'Hentai'
+    #     else:
+    #         genre = ''
+    #     genre = self.add_general_genres(genre, os.path.join(the_path, filename))
+    #     pornstars = '11037'
+    #     filename = os.path.join(the_path, filename)
+    #     if filename.lower().__contains__('Office Ms Conduct'.lower()):
+    #         conduct_pornstars = self.get_list_of_contents('OfficeMsConduct.txt')
+    #         conduct_pornstars.sort(key=str.lower)
+    #         pornstars = '11037'
+    #         for line in conduct_pornstars:
+    #             star = line.replace('\n', '')
+    #             if pornstars == '11037':
+    #                 pornstars = pornstars + star
+    #             else:
+    #                 pornstars = pornstars + '; ' + star
+    #     elif filename.lower().__contains__('Trans Lesbians'.lower()):
+    #         conduct_pornstars = self.get_list_of_contents('Trans Lesbians.txt')
+    #         conduct_pornstars.sort(key=str.lower)
+    #         pornstars = '11037'
+    #         for line in conduct_pornstars:
+    #             star = line.replace('\n', '')
+    #             if pornstars == '11037':
+    #                 pornstars = pornstars + star
+    #             else:
+    #                 pornstars = pornstars + '; ' + star
+    #     elif filename.lower().__contains__('The Gift.'.lower()):
+    #         self.write_to_log('filename to update is The Gift')
+    #         conduct_pornstars = self.get_list_of_contents('The Gift.txt')
+    #         conduct_pornstars.sort(key=str.lower)
+    #         pornstars = '11037'
+    #         self.write_to_log('pornstars are {}'.format(conduct_pornstars))
+    #         for line in conduct_pornstars:
+    #             star = line.replace('\n', '')
+    #             if pornstars == '11037':
+    #                 pornstars = pornstars + star
+    #             else:
+    #                 pornstars = pornstars + '; ' + star
+    #     elif filename.lower().__contains__('The Oral Experiment'.lower()):
+    #         conduct_pornstars = self.get_list_of_contents('Oral Experiment.txt')
+    #         conduct_pornstars.sort(key=str.lower)
+    #         pornstars = '11037'
+    #         for line in conduct_pornstars:
+    #             star = line.replace('\n', '')
+    #             if pornstars == '11037':
+    #                 pornstars = pornstars + star
+    #             else:
+    #                 pornstars = pornstars + '; ' + star
+    #     elif filename.lower().__contains__('Too Hot For Teacher'.lower()):
+    #         conduct_pornstars = self.get_list_of_contents('Hot for Teach.txt')
+    #         conduct_pornstars.sort(key=str.lower)
+    #         pornstars = '11037'
+    #         for line in conduct_pornstars:
+    #             star = line.replace('\n', '')
+    #             if pornstars == '11037':
+    #                 pornstars = pornstars + star
+    #             else:
+    #                 pornstars = pornstars + '; ' + star
+    #     else:
+    #         for star in self.list_of_pornstars:
+    #             star = star.replace('\n', '')
+    #             pornstar = star.lower().strip()
+    #             if filename.lower().__contains__(pornstar):
+    #                 if pornstars == '11037':
+    #                     pornstars = pornstars + star
+    #                 else:
+    #                     if star.__contains__(' '):
+    #                         first_name = star.split(' ')[0]
+    #                     else:
+    #                         first_name = star
+    #                     if not (pornstars.__contains__(first_name)):
+    #                         pornstars = pornstars + '; ' + star
+    #                     else:
+    #                         #some pornstar first names are repeated
+    #                         if pornstars.__contains__('11037' + first_name + '; '): #first name in list of pornstars
+    #                             pornstars = pornstars.replace(first_name + '; ', star + '; ')
+    #                         elif (pornstars.__contains__('11037' + first_name)) and not (pornstars.__contains__(' ')): #Only name in list of pornstars
+    #                             pornstars = pornstars.replace(first_name, star)
+    #                         elif pornstars.__contains__('; ' + first_name + ';'): #middle in list of pornstars
+    #                             pornstars = pornstars.replace('; ' + first_name, '; ' + star)
+    #                         elif pornstars.__contains__('; ' + first_name): #Last name in list of pornstars
+    #                             pornstars = pornstars.replace('; ' + first_name, '; ' + star)
+    #                         else:
+    #                             pornstars = pornstars + '; ' + star
+    #     pornstars = pornstars.replace('11037', '')
+    #     the_path, filename = os.path.split(filename)
+    #     update_dic = {
+    #                     'Path': [the_path],
+    #                     'Filename': [filename],
+    #                     'Filetype': [extension],
+    #                     'Animated': [animation],
+    #                     'Pornstars': [pornstars],
+    #                     'Ethnicities': [''],
+    #                     'Genres': [genre],
+    #                     'Duration': [dur]
+    #                     }
+    #     new_df = pd.DataFrame(update_dic)
+    #     dataframe = pd.concat([old_frame, new_df], ignore_index = True)
+    #     dataframe.replace(float('nan'), '')
+    #     dataframe.replace(',nan,', '')
+    #     self.write_to_log(os.path.join(the_path, filename))
+    #     return dataframe
     
     def generic_update(self):
         for frame in [self.dataframe, self.filtereddataframe]:
@@ -3348,172 +3348,172 @@ class BackendFuncs:
                                                                          os.path.join(absolute_path,
                                                                                       new_name))))
 
-    def refresh(self, pornstar_widget, genres_widget, ethnicity_widget, filtered_widget, main_root, hourLable):
-        self.list_of_pornstars = self.get_list_of_contents(self.porntxt)
-        self.list_of_pornstars.sort(key=str.lower)
-        self.list_of_genres = self.get_list_of_contents(self.genretxt)
-        self.list_of_genres.sort(key=str.lower)
-        self.list_of_ethnicities = self.get_list_of_contents(self.ethnicitytxt)
-        self.list_of_ethnicities.sort(key=str.lower)
-        self.viewing_unupdated = False
-        self.initial_update()
-        #self.update_csv(self.get_all_videos_from_root(self.root_path), self.the_csv)
-        self.dataframe = pd.read_csv(self.the_csv, delimiter=',', header=0,
-                                     skip_blank_lines=True, na_values='')
-        self.dataframe.replace(',nan,', '')
-        self.dataframe.replace('NaN', '')
-        self.dataframe.replace('NAN', '')
-        self.dataframe.replace('; nan ;', '')
-        self.dataframe.replace(',nan ;', '')
-        self.dataframe.replace('; nan,', '')
-        self.dataframe.to_csv(self.the_csv, index=False)
-        self.filtereddataframe = pd.read_csv(self.the_csv, delimiter=',', header=0,
-                                             skip_blank_lines=True, na_values='')
-        self.filtereddataframe.replace(',nan,', '')
-        self.dataframe['Ethnicities'] = self.dataframe['Ethnicities'].astype(str)
-        self.filtereddataframe['Ethnicities'] = self.filtereddataframe['Ethnicities'].astype(str)
-        self.dataframe['Genres'] = self.dataframe['Genres'].astype(str)
-        self.filtereddataframe['Genres'] = self.filtereddataframe['Genres'].astype(str)
-        self.dataframe['Pornstars'] = self.dataframe['Pornstars'].astype(str)
-        self.filtereddataframe['Pornstars'] = self.filtereddataframe['Pornstars'].astype(str)
-        self.dataframe['Animated'] = self.dataframe['Animated'].astype(str)
-        self.filtereddataframe['Animated'] = self.filtereddataframe['Animated'].astype(str)
-        self.dataframe['Duration'] = self.dataframe['Duration'].astype(float)
-        self.filtereddataframe['Duration'] = self.filtereddataframe['Duration'].astype(float)
-        self.desired_genres = []
-        self.desired_pornstars = []
-        self.undesired_genres = []
-        self.undesired_pornstars = []
-        self.desired_ethnicities = []
-        self.undesired_ethnicities = []
-        self.selections = ['Pornstar', 'Ethnicity', 'Genre']
-        self.animatedselections = ['Pornstar', 'Ethnicity', 'Genre']
-        self.selection = self.selections[self.generate_random_integer(0, len(self.selections)-1)]#'Pornstar'
-        self.desired_or_undesired_options = ['Desired', 'Undesired']
-        self.desired_or_undesired = self.desired_or_undesired_options[self.generate_random_integer(0,
-                                                                                                   len(self.desired_or_undesired_options)-1)
-                                                                                                   ]#'Desired'
-        self.hours = 0
-        self.minutes = 0
-        self.seconds = 0 #seconds
-        self.duration = (self.hours * 60 *60) + (self.minutes * 60) + self.seconds
-        self.comparator = '>='
-        self.animated = ''
-        self.filename = ''
-        self.update_generic_listbox(pornstar_widget, self.list_of_pornstars)
-        self.update_generic_listbox(genres_widget, self.list_of_genres)
-        self.update_generic_listbox(ethnicity_widget, self.list_of_ethnicities)
-        self.update_videos_listbox(filtered_widget)
-        self.update_porn_hours(hourLable)
+    # def refresh(self, pornstar_widget, genres_widget, ethnicity_widget, filtered_widget, main_root, hourLable):
+    #     self.list_of_pornstars = self.get_list_of_contents(self.porntxt)
+    #     self.list_of_pornstars.sort(key=str.lower)
+    #     self.list_of_genres = self.get_list_of_contents(self.genretxt)
+    #     self.list_of_genres.sort(key=str.lower)
+    #     self.list_of_ethnicities = self.get_list_of_contents(self.ethnicitytxt)
+    #     self.list_of_ethnicities.sort(key=str.lower)
+    #     self.viewing_unupdated = False
+    #     self.initial_update()
+    #     #self.update_csv(self.get_all_videos_from_root(self.root_path), self.the_csv)
+    #     self.dataframe = pd.read_csv(self.the_csv, delimiter=',', header=0,
+    #                                  skip_blank_lines=True, na_values='')
+    #     self.dataframe.replace(',nan,', '')
+    #     self.dataframe.replace('NaN', '')
+    #     self.dataframe.replace('NAN', '')
+    #     self.dataframe.replace('; nan ;', '')
+    #     self.dataframe.replace(',nan ;', '')
+    #     self.dataframe.replace('; nan,', '')
+    #     self.dataframe.to_csv(self.the_csv, index=False)
+    #     self.filtereddataframe = pd.read_csv(self.the_csv, delimiter=',', header=0,
+    #                                          skip_blank_lines=True, na_values='')
+    #     self.filtereddataframe.replace(',nan,', '')
+    #     self.dataframe['Ethnicities'] = self.dataframe['Ethnicities'].astype(str)
+    #     self.filtereddataframe['Ethnicities'] = self.filtereddataframe['Ethnicities'].astype(str)
+    #     self.dataframe['Genres'] = self.dataframe['Genres'].astype(str)
+    #     self.filtereddataframe['Genres'] = self.filtereddataframe['Genres'].astype(str)
+    #     self.dataframe['Pornstars'] = self.dataframe['Pornstars'].astype(str)
+    #     self.filtereddataframe['Pornstars'] = self.filtereddataframe['Pornstars'].astype(str)
+    #     self.dataframe['Animated'] = self.dataframe['Animated'].astype(str)
+    #     self.filtereddataframe['Animated'] = self.filtereddataframe['Animated'].astype(str)
+    #     self.dataframe['Duration'] = self.dataframe['Duration'].astype(float)
+    #     self.filtereddataframe['Duration'] = self.filtereddataframe['Duration'].astype(float)
+    #     self.desired_genres = []
+    #     self.desired_pornstars = []
+    #     self.undesired_genres = []
+    #     self.undesired_pornstars = []
+    #     self.desired_ethnicities = []
+    #     self.undesired_ethnicities = []
+    #     self.selections = ['Pornstar', 'Ethnicity', 'Genre']
+    #     self.animatedselections = ['Pornstar', 'Ethnicity', 'Genre']
+    #     self.selection = self.selections[self.generate_random_integer(0, len(self.selections)-1)]#'Pornstar'
+    #     self.desired_or_undesired_options = ['Desired', 'Undesired']
+    #     self.desired_or_undesired = self.desired_or_undesired_options[self.generate_random_integer(0,
+    #                                                                                                len(self.desired_or_undesired_options)-1)
+    #                                                                                                ]#'Desired'
+    #     self.hours = 0
+    #     self.minutes = 0
+    #     self.seconds = 0 #seconds
+    #     self.duration = (self.hours * 60 *60) + (self.minutes * 60) + self.seconds
+    #     self.comparator = '>='
+    #     self.animated = ''
+    #     self.filename = ''
+    #     self.update_generic_listbox(pornstar_widget, self.list_of_pornstars)
+    #     self.update_generic_listbox(genres_widget, self.list_of_genres)
+    #     self.update_generic_listbox(ethnicity_widget, self.list_of_ethnicities)
+    #     self.update_videos_listbox(filtered_widget)
+    #     self.update_porn_hours(hourLable)
 
-    def delete_video(self, listbox_widget, hourLable=False):
-        vid = self.get_single_selection(listbox_widget)
-        if os.path.exists(vid):
-            self.write_to_log(vid)
-            os.remove(vid)
-        else:
-            self.write_to_log('{} DNE'.format(vid))
-        absolute_path, file = os.path.split(vid)
-        self.write_to_log(absolute_path+' , '+file)
-        self.dataframe = self.remove_row_from_dataframe(self.dataframe, file, absolute_path)
-        self.filtereddataframe = self.remove_row_from_dataframe(self.filtereddataframe, file, absolute_path)
-        self.update_videos_listbox(listbox_widget)
-        self.dataframe.replace(float('nan'), '')
-        self.dataframe.replace(',nan,', '')
-        self.dataframe.to_csv(self.the_csv, index=False)
-        self.update_batch_file_message(vid+' removed')
-        self.start_file('git_update.bat', False)
-        if hourLable != False:
-            self.update_porn_hours(hourLable) 
+    # def delete_video(self, listbox_widget, hourLable=False):
+    #     vid = self.get_single_selection(listbox_widget)
+    #     if os.path.exists(vid):
+    #         self.write_to_log(vid)
+    #         os.remove(vid)
+    #     else:
+    #         self.write_to_log('{} DNE'.format(vid))
+    #     absolute_path, file = os.path.split(vid)
+    #     self.write_to_log(absolute_path+' , '+file)
+    #     self.dataframe = self.remove_row_from_dataframe(self.dataframe, file, absolute_path)
+    #     self.filtereddataframe = self.remove_row_from_dataframe(self.filtereddataframe, file, absolute_path)
+    #     self.update_videos_listbox(listbox_widget)
+    #     self.dataframe.replace(float('nan'), '')
+    #     self.dataframe.replace(',nan,', '')
+    #     self.dataframe.to_csv(self.the_csv, index=False)
+    #     self.update_batch_file_message(vid+' removed')
+    #     self.start_file('git_update.bat', False)
+    #     if hourLable != False:
+    #         self.update_porn_hours(hourLable) 
 
-    def update_csv(self, list_of_files, csv_file):
-        #list_of_files must have full abolute path
-        dataframe = pd.read_csv(csv_file, delimiter=',', header=0,
-                                     skip_blank_lines=True, na_values='')
-        dataframe = dataframe.drop_duplicates()
-        list_of_files_in_dataframe = self.list_from_dataframe(dataframe, 'Filename')
-        self.write_to_log('Updating...')
-        for file_with_absolute_path in list_of_files:
-            absolute_path, file = os.path.split(file_with_absolute_path)
-            if os.path.exists(file_with_absolute_path):#checking if it exits
-                #check if file is already in the dataframe
-                self.write_to_log('check if file is already in the dataframe')
-                if not (file in list_of_files_in_dataframe):
-                    #Add to dataframe
-                    self.write_to_log('Add to dataframe')
-                    duration = self.get_duration(file_with_absolute_path) #in seconds
-                    file_type = file_with_absolute_path.split('.')[1]
-                    if duration > 0:
-                        dataframe = self.update_dataframe(dataframe, absolute_path, file, file_type, duration)
-                else:
-                    #Check if path is the same
-                    filtered_df = self.filter_dataframe(dataframe, Filename=file, Path=absolute_path)
-                    path_filtered_list = self.list_from_dataframe(filtered_df, 'Path')
-                    if len(path_filtered_list) == 0:
-                        self.write_to_log('len(path_filtered_list) == 0')
-                        less_filtered_df = self.filter_dataframe(dataframe, Filename=file)
-                        path_filtered_list = self.list_from_dataframe(less_filtered_df, 'Path')
-                        if len(path_filtered_list) == 1:
-                            self.write_to_log('Here!'+ file_with_absolute_path+ '\n'+ less_filtered_df)
-                            og_abs_path = self.get_value_at_cell(less_filtered_df.head().index[0],
-                                                                 'Path', less_filtered_df)
-                            self.dataframe = self.edit_dataframe(self.dataframe, file, og_abs_path,
-                                                                 'Path', absolute_path)
-                            try:
-                                self.filtereddataframe = self.edit_dataframe(self.filtereddataframe, file,
-                                                                             og_abs_path,
-                                                                            'Path', absolute_path)
-                            except:
-                                self.filtereddataframe = self.dataframe
-                            dataframe = self.dataframe
-                        else:
-                            duration = self.get_duration(file_with_absolute_path) #in seconds
-                            file_type = file_with_absolute_path.split('.')[1]
-                            dataframe = self.update_dataframe(dataframe, absolute_path, file, file_type, duration)
-                            updated_filtered_df = self.filter_dataframe(dataframe, Filename=file)
-                            for index in updated_filtered_df.head().index:
-                                name_of_file = self.get_value_at_cell(index, 'Filename', updated_filtered_df)
-                                path_of_file = self.get_value_at_cell(index, 'Path', updated_filtered_df)
-                                full_file = os.path.join(path_of_file, name_of_file)
-                                if not os.path.exists(full_file):
-                                    #remove from dataframe
-                                    self.write_to_log('remove from dataframe')
-                                    self.dataframe = self.remove_row_from_dataframe(self.dataframe,
-                                                                                    name_of_file,
-                                                                                    path_of_file)
-                                    self.filtereddataframe = self.remove_row_from_dataframe(self.filtereddataframe,
-                                                                                    name_of_file,
-                                                                                    path_of_file)
-                    elif len(path_filtered_list) == 1:
-                        #Check if duration is the same
-                        self.write_to_log('Check if duration is the same')
-                        duration = self.get_duration(file_with_absolute_path) #in seconds
-                        duration_filtered_list = self.list_from_dataframe(filtered_df, 'Duration')
-                        if abs(duration - duration_filtered_list[0]) < 1:
-                            self.write_to_log('abs(duration - duration_filtered_list[0]) < 1')
-                        else:
-                            dataframe = self.edit_dataframe(dataframe, file, absolute_path, 'Duration', duration)
-                    else:
-                        #There are multiple files in the dataframe with the same name and path
-                        #Windows does not allow that so there must be a duplicate
-                        #Might be better to just start from scratch on this one
-                        self.write_to_log('Might be better to just start from scratch on this one')
-                        dataframe = self.remove_row_from_dataframe(dataframe, file, absolute_path)
-                        duration = self.get_duration(file_with_absolute_path) #in seconds
-                        if duration > 0:
-                            file_type = file_with_absolute_path.split('.')[1]
-                            dataframe = self.update_dataframe(dataframe, absolute_path, file, file_type, duration)
-            else:
-                self.write_to_log('os.path.exists(file_with_absolute_path) iz false')
-                dataframe = self.remove_row_from_dataframe(dataframe, file, absolute_path)
-        self.dataframe = dataframe
-        self.dataframe = self.dataframe.drop_duplicates(subset=['Path', 'Filename',
-                                                                                #'Pornstars', 'Ethnicities',
-                                                                                'Genres', 'Duration'])
-        self.dataframe.replace(',nan,', '')
-        self.dataframe.replace(float('nan'), '')
-        self.dataframe.to_csv(csv_file, index=False)
-        self.write_to_log('Update complete')
+    # def update_csv(self, list_of_files, csv_file):
+    #     #list_of_files must have full abolute path
+    #     dataframe = pd.read_csv(csv_file, delimiter=',', header=0,
+    #                                  skip_blank_lines=True, na_values='')
+    #     dataframe = dataframe.drop_duplicates()
+    #     list_of_files_in_dataframe = self.list_from_dataframe(dataframe, 'Filename')
+    #     self.write_to_log('Updating...')
+    #     for file_with_absolute_path in list_of_files:
+    #         absolute_path, file = os.path.split(file_with_absolute_path)
+    #         if os.path.exists(file_with_absolute_path):#checking if it exits
+    #             #check if file is already in the dataframe
+    #             self.write_to_log('check if file is already in the dataframe')
+    #             if not (file in list_of_files_in_dataframe):
+    #                 #Add to dataframe
+    #                 self.write_to_log('Add to dataframe')
+    #                 duration = self.get_duration(file_with_absolute_path) #in seconds
+    #                 file_type = file_with_absolute_path.split('.')[1]
+    #                 if duration > 0:
+    #                     dataframe = self.update_dataframe(dataframe, absolute_path, file, file_type, duration)
+    #             else:
+    #                 #Check if path is the same
+    #                 filtered_df = self.filter_dataframe(dataframe, Filename=file, Path=absolute_path)
+    #                 path_filtered_list = self.list_from_dataframe(filtered_df, 'Path')
+    #                 if len(path_filtered_list) == 0:
+    #                     self.write_to_log('len(path_filtered_list) == 0')
+    #                     less_filtered_df = self.filter_dataframe(dataframe, Filename=file)
+    #                     path_filtered_list = self.list_from_dataframe(less_filtered_df, 'Path')
+    #                     if len(path_filtered_list) == 1:
+    #                         self.write_to_log('Here!'+ file_with_absolute_path+ '\n'+ less_filtered_df)
+    #                         og_abs_path = self.get_value_at_cell(less_filtered_df.head().index[0],
+    #                                                              'Path', less_filtered_df)
+    #                         self.dataframe = self.edit_dataframe(self.dataframe, file, og_abs_path,
+    #                                                              'Path', absolute_path)
+    #                         try:
+    #                             self.filtereddataframe = self.edit_dataframe(self.filtereddataframe, file,
+    #                                                                          og_abs_path,
+    #                                                                         'Path', absolute_path)
+    #                         except:
+    #                             self.filtereddataframe = self.dataframe
+    #                         dataframe = self.dataframe
+    #                     else:
+    #                         duration = self.get_duration(file_with_absolute_path) #in seconds
+    #                         file_type = file_with_absolute_path.split('.')[1]
+    #                         dataframe = self.update_dataframe(dataframe, absolute_path, file, file_type, duration)
+    #                         updated_filtered_df = self.filter_dataframe(dataframe, Filename=file)
+    #                         for index in updated_filtered_df.head().index:
+    #                             name_of_file = self.get_value_at_cell(index, 'Filename', updated_filtered_df)
+    #                             path_of_file = self.get_value_at_cell(index, 'Path', updated_filtered_df)
+    #                             full_file = os.path.join(path_of_file, name_of_file)
+    #                             if not os.path.exists(full_file):
+    #                                 #remove from dataframe
+    #                                 self.write_to_log('remove from dataframe')
+    #                                 self.dataframe = self.remove_row_from_dataframe(self.dataframe,
+    #                                                                                 name_of_file,
+    #                                                                                 path_of_file)
+    #                                 self.filtereddataframe = self.remove_row_from_dataframe(self.filtereddataframe,
+    #                                                                                 name_of_file,
+    #                                                                                 path_of_file)
+    #                 elif len(path_filtered_list) == 1:
+    #                     #Check if duration is the same
+    #                     self.write_to_log('Check if duration is the same')
+    #                     duration = self.get_duration(file_with_absolute_path) #in seconds
+    #                     duration_filtered_list = self.list_from_dataframe(filtered_df, 'Duration')
+    #                     if abs(duration - duration_filtered_list[0]) < 1:
+    #                         self.write_to_log('abs(duration - duration_filtered_list[0]) < 1')
+    #                     else:
+    #                         dataframe = self.edit_dataframe(dataframe, file, absolute_path, 'Duration', duration)
+    #                 else:
+    #                     #There are multiple files in the dataframe with the same name and path
+    #                     #Windows does not allow that so there must be a duplicate
+    #                     #Might be better to just start from scratch on this one
+    #                     self.write_to_log('Might be better to just start from scratch on this one')
+    #                     dataframe = self.remove_row_from_dataframe(dataframe, file, absolute_path)
+    #                     duration = self.get_duration(file_with_absolute_path) #in seconds
+    #                     if duration > 0:
+    #                         file_type = file_with_absolute_path.split('.')[1]
+    #                         dataframe = self.update_dataframe(dataframe, absolute_path, file, file_type, duration)
+    #         else:
+    #             self.write_to_log('os.path.exists(file_with_absolute_path) iz false')
+    #             dataframe = self.remove_row_from_dataframe(dataframe, file, absolute_path)
+    #     self.dataframe = dataframe
+    #     self.dataframe = self.dataframe.drop_duplicates(subset=['Path', 'Filename',
+    #                                                                             #'Pornstars', 'Ethnicities',
+    #                                                                             'Genres', 'Duration'])
+    #     self.dataframe.replace(',nan,', '')
+    #     self.dataframe.replace(float('nan'), '')
+    #     self.dataframe.to_csv(csv_file, index=False)
+    #     self.write_to_log('Update complete')
 
     def remove_row_from_dataframe(self, dataframe_to_be_updated, filename, abs_path):
         row_indexes = dataframe_to_be_updated[(dataframe_to_be_updated['Filename'] == filename) & (dataframe_to_be_updated['Path'] == abs_path)].index.tolist()

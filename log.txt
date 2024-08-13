@@ -5887,3 +5887,12 @@ screen width is 1280 height is 720, window width is 1152.0 height is 648.0
 08/13/2024 11:58:47
 screen width is 1280 height is 720, window width is 1152 height is 648
 
+08/13/2024 12:03:50
+init complete
+
+08/13/2024 12:03:50
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/13/2024 12:03:50
+screen width is 1280 height is 720, window width is 1216 height is 684
+
