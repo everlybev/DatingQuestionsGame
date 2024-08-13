@@ -422,8 +422,8 @@ class Textinput_Widget():
             self.inputboxes = temp
 
     def place_here(self, xloc, yloc, paddingx=1, paddingy=1, ancor='center', rel=False):
-        truex = (self.width/2) + paddingx + xloc
-        truey = (self.height/2) + paddingy + yloc
+        truex = (self.width/2) + paddingx + int(xloc)
+        truey = (self.height/2) + paddingy + int(yloc)
         if rel:
             #xcenterpix = 
             self.inputboxes[len(self.inputboxes)-1].place(relx=truex, rely=truex, anchor=ancor)

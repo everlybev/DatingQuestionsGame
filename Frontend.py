@@ -53,7 +53,8 @@ class Window(Tk):
         self.root.geometry('{}x{}+{}+{}'.format(self.window_width, self.window_height, self.positionHorizontal, self.positionVertical))
 
     def build_app(self, image=r"Background.png", w=960, h=540):
-        self.set_window_dimensions(.95*self.screenwidth_in_pixels, .95*self.screenheight_in_pixels)
+        scale_factor = .95
+        self.set_window_dimensions(scale_factor*self.screenwidth_in_pixels, scale_factor*self.screenheight_in_pixels)
         self.set_background(image)
 
         #Stats Label
@@ -84,19 +85,21 @@ class Window(Tk):
 
         #Names Label
         namesLabel = Label_Widget(self.root)
-        namesLabel.add_widget('Names:\nBF:                           \nGF:                           ', 555, 10)
+        namesLabel.add_widget('Names:\nBF:                                      \nGF:                                      \n', 555, 10)
         namesLabel.change_font_size(standard_font_size)
         namesLabel.place_here(1, 1, 0, 0)
 
         #GF Name Input
         GFInput = Textinput_Widget(self.root)
         GFInput.add_widget(max(len('Evan S. Everett'), len('Laura Parrell')), 1)
-        GFInput.place_here(43, 42)
+        GFInput.place_here(.03536184*self.window_width,
+                           .06140351*self.window_height)
 
         #GF Name Input
         BFInput = Textinput_Widget(self.root)
         BFInput.add_widget(max(len('Evan S. Everett'), len('Laura Parrell')), 1)
-        BFInput.place_here(43, GFInput.y-(GFInput.height/2)-BFInput.height, 0, -1)
+        BFInput.place_here((43/1216)*self.window_width,
+                           GFInput.y-(GFInput.height/2)-BFInput.height, 0, -1)
 
         #Qustion Label
         QustionLable = Label_Widget(self.root)

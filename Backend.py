@@ -20,8 +20,17 @@ import ctypes
 
 class BackendFuncs:
     def __init__(self):
+        self.player_index = self.generate_random_integer(1, 4) % 2
+        if self.player_index == 1:
+            self.other_player_index = 0
+        if self.player_index == 0:
+            self.other_player_index = 1
+        self.players = [[],[]]
         self.questions = [
             'What is one thing you have always wanted to try in the bedroom but have not told me?',
+            'If money was no object would you want a grand wedding or something small?  Explain.',
+            'How long should you date a person at minimum before getting married?'
+            'What do you think is my favorite thing about you?'
             'Where is the most adventurous place you wouldd like to make love?',
             'What is a secret fantasy you have never shared with anyone?',
             'How do you feel about role play, and what scenario intrigues you?',
@@ -39,6 +48,7 @@ class BackendFuncs:
             'Have you ever had a dream about us that you have not shared?',
             'What kind of touch do you crave the most?',
             'Is there a song that makes you think about being intimate with me?',
+            'How old were you when you started masturbating?',
             'How do you feel about taking our intimacy outside the bedroom?',
             'What is the most daring thing you have ever wanted to do with me?',
             'What is something you find incredibly attractive about me that I would never guess?',
@@ -90,89 +100,89 @@ class BackendFuncs:
             'How do you see our future together, and what are your aspirations for us?',
             'What is a lesson from a past relationship that you have brought into ours?',
             'What are your thoughts on forgiveness and second chances in love?',
-            'How do you maintain your sense of self while being deeply connected to someone else?'
-            # 'What’s something you’ve learned about yourself from being with me?
-            # 'How do you express love, and in what ways do you prefer to receive it?
-            # 'What’s a dream you’ve yet to achieve, and how can I support you in it?
-            # 'If you could change one aspect of our relationship, what would it be and why?
-            # 'How do you envision our life together in 10 years?
-            # 'How do you define happiness, and do you think it’s achievable?
-            # 'How do you reconcile the existence of good and evil in the world?
-            # 'What role does love play in the universe?
-            # 'How do you balance the need for individual freedom with the importance of community?
-            # 'How do you define success, and is it subjective or universal?
-            # 'What does it mean to live a good life?
-            # 'How important is it to leave a legacy, and what kind do you want to leave?
-            # 'Do you believe in the concept of a parallel universe or alternate realities?
-            # 'What’s the role of art and creativity in society?
-            # 'Is there such a thing as absolute truth, or is everything relative?
-            # 'If you could travel to any point back in time, what year would you choose and why?
-            # 'What are a few things at the top of your bucket list? 
-            # 'What decision do you look back on and say, “What was I thinking?”
-            # 'If you could give your 16-year-old self one piece of advice, what would it be? Would you have listened?
-            # 'Who is/was the most influential person in your life?
-            # 'What is the first thing you would do if you won the mega millions lottery? 
-            # 'What is the weirdest dream you’ve ever had?
-            # 'What is the most embarrassing thing you’ve done in public?
-            # 'Would you consider yourself adventurous, or do you play it on the safe side?
-            # 'What would you title this chapter of your life?
-            # 'If you could re-live any part of your life so far, which part would you choose and why?
-            # 'What is the biggest lesson you learned from your teens/twenties?
-            # 'Who would you want to sit next to on a ten-hour flight across the world (aside from self.signifigant_other), and why?
-            # 'If you could be any kind of dog, what breed would you be? 
-            # 'Do you think the convenience of the internet is worth the loss of privacy that comes with it?
-            # 'If you found out that your current life has been only a dream, would you choose to wake up or stay in it? 
-            # 'What are three non-negotiable traits you want in a partner? 
-            # 'What have you always dreamed someone would do for you? 
-            # 'What is your idea of the perfect relationship?
-            # 'Do you believe opposites attract? 
-            # 'What is a common relationship belief that you don’t agree with?
-            # 'Aside from common pet names such as babe, sweethert, hun, etc. what is a pet name you would like to exclusively call {}?'.format(self.signifigant_other)
-            # 'What quirky habit do you have that no one knows about?
-            # 'How would you want to spend a one-week vacation with your lover?
-            # 'What brings you the most joy in life?
-            # 'What part of yourself have you learned to accept?
-            # 'Imagine you’re dating the most attractive person in the world, but your family doesn’t like them. Would you stay with them? Why or why not? 
-            # 'How important is humor for you in a relationship?
-            # 'What is your definition of a healthy relationship?
-            # 'What was your first impression of me? 
-            # 'When looking at someone you’re attracted to, where do your eyes go first?
-            # 'How old were you when you had your first kiss?
-            # 'What is the most spontaneous thing you’ve ever done?
-            # 'What is your biggest regret?
-            # 'If you could live someone else’s life for a day, who would you choose?
-            # 'What do you consider the most romantic travel destination in the world?
-            # 'What is your biggest fear when it comes to relationships?
-            # 'Romantic lunch picnic in the park or a high-class dinner and cocktails? 
-            # 'What’s your biggest turn-on?
-            # 'Do you prefer cuddling or kissing?
-            # 'Have you ever had a crush on a teacher or someone much older (5+ years) than you?
-            # 'Love or money?
-            # 'What is the shortest and longest relationship you’ve ever had? 
-            # 'What is the craziest thing you’ve ever seen someone do for love?
-            # 'What is a relationship deal breaker?
-            # 'What is your favorite thing about me?
-            # 'What do you think is my favorite thing about you?
-            # 'What sets you apart from other people? 
-            # 'What do you think sets me apart from other people?
-            # 'What is your favorite childhood memory? 
-            # 'Have you ever skinny dipped with a group?
-            # 'Do you think you're a good kisser?''
-            # 'Where do you like being touched the most?
-            # 'Is there anywhere you would like to be kissed more often aside from the lips'
-            # 'How old were you when you lost your virginity?
-            # 'Where is the strangest place you've ever had sex?
-            # 'Where would you love to have sex?
-            # 'What turns you on almost instantly?
-            # 'How do you feel about bringing toys into the bedroom?
-            # 'Have you ever bragged to your friends about me?
-            # 'Have you ever been to a strip club?
-            # 'What kind of talk do you like, if any, in bed?
-            # 'Have you ever had a dream about me?
-            # 'Have you ever kissed me in public just to make someone jealous?
-            # 'Hickies: major yes or no way?
-            # 'What is a fantasy you've never shared with anyone?
-
+            'How do you maintain your sense of self while being deeply connected to someone else?',
+            'What is something you have learned about yourself from being with me?',
+            'How do you express love, and in what ways do you prefer to receive it?',
+            'What is a dream you have yet to achieve, and how can I support you in it?',
+            'If you could change one aspect of our relationship, what would it be and why?',
+            'How do you envision our life together in 10 years?',
+            'How do you define happiness, and do you think it is achievable?',
+            'How do you reconcile the existence of good and evil in the world?',
+            'What role does love play in the universe?',
+            'How do you balance the need for individual freedom with the importance of community?',
+            'How do you define success, and is it subjective or universal?',
+            'What does it mean to live a good life?',
+            'How important is it to leave a legacy, and what kind do you want to leave?',
+            'Do you believe in the concept of a parallel universe or alternate realities?',
+            'What is the role of art and creativity in society?',
+            'Is there such a thing as absolute truth, or is everything relative?',
+            'If you could travel to any point back in time, what year would you choose and why?',
+            'What are a few things at the top of your bucket list?',
+            'What decision do you look back on and say, "What was I thinking?"',
+            'If you could give your 16-year-old self one piece of advice, what would it be? Would you have listened?',
+            'Who is/was the most influential person in your life?',
+            'What is the first thing you would do if you won the mega millions lottery?', 
+            'What is the weirdest dream you have ever had?',
+            'What is the most embarrassing thing you have done in public?',
+            'Would you consider yourself adventurous, or do you play it on the safe side?',
+            'What would you title this chapter of your life?',
+            'If you could re-live any part of your life so far, which part would you choose and why?',
+            'What is the biggest lesson you learned from your teens/twenties?',
+            'Who would you want to sit next to on a ten-hour flight across the world (aside from self.signifigant_other), and why?',
+            'If you could be any kind of dog, what breed would you be? ',
+            'Do you think the convenience of the internet is worth the loss of privacy that comes with it?',
+            'If you found out that your current life has been only a dream, would you choose to wake up or stay in it?', 
+            'What are three non-negotiable traits you want in a partner?',
+            'What have you always dreamed someone would do for you?',
+            'What is your idea of the perfect relationship?',
+            'Do you believe opposites attract? ',
+            'What is a common relationship belief that you do not agree with?',
+            'Aside from common pet names such as babe, sweethert, hun, etc. what is a pet name you would like to exclusively call me?',
+            'What quirky habit do you have that no one knows about?',
+            'How would you want to spend a one-week vacation with your lover?',
+            'What brings you the most joy in life?',
+            'What part of yourself have you learned to accept?',
+            'Imagine you are dating the most attractive person in the world, but your family does not like them. Would you stay with them? Why or why not?',
+            'How important is humor for you in a relationship?',
+            'What is your definition of a healthy relationship?',
+            'What was your first impression of me?',
+            'When looking at someone you are attracted to, where do your eyes go first?',
+            'How old were you when you had your first kiss?',
+            'What is the most spontaneous thing you have ever done?',
+            'What is your biggest regret?',
+            'If you could live someone else is life for a day, who would you choose?',
+            'What do you consider the most romantic travel destination in the world?',
+            'What is your biggest fear when it comes to relationships?',
+            'Romantic lunch picnic in the park or a high-class dinner and cocktails?',
+            'What is your biggest turn-on?',
+            'Do you prefer cuddling or kissing?',
+            'Have you ever had a crush on a teacher or someone much older (5+ years) than you?',
+            'Love or money?',
+            'What is the shortest and longest relationship you have ever had?',
+            'What is the craziest thing you have ever seen someone do for love?',
+            'What is a relationship deal breaker?',
+            'What is your favorite thing about me?',
+            'What sets you apart from other people?',
+            'What do you think sets me apart from other people?',
+            'What is your favorite childhood memory?',
+            'Have you ever skinny dipped with a group?',
+            'Do you think you are a good kisser?',
+            'Where do you like being touched the most?',
+            'Is there anywhere you would like to be kissed more often aside from the lips',
+            'How old were you when you lost your virginity?',
+            'Where is the strangest place you have ever had sex?',
+            'Where would you love to have sex?',
+            'What turns you on almost instantly?',
+            'How do you feel about bringing toys into the bedroom?',
+            'Have you ever bragged to your friends about me?',
+            'Have you ever been to a strip club?',
+            'What kind of talk do you like, if any, in bed?',
+            'Have you ever had a dream about me?', 
+            'Have you ever kissed me in public just to make someone jealous?',
+            'Hickies: major yes or no way?',
+            'What is a fantasy you have never shared with anyone?',
+            'Outside of relationship fears what are your biggest fears?',
+            'Premarital (safe) sex: Yes or No?'
         ]
         self.bf_total_questions = 0
         self.gf_total_questions = 0
@@ -186,7 +196,6 @@ class BackendFuncs:
         self.GF_number_of_bought_skips = 0
         u = ctypes.windll.user32
         [self.screenwidth_in_pixels, self.screenheight_in_pixels] = [u.GetSystemMetrics(0), u.GetSystemMetrics(1)]
-        self.player_index = self.generate_random_integer(1, 4) % 2
         self.bf_name = ''
         self.gf_name = ' '
         self.rulez = 'Rules:\n1. Players must alternate\nturns.  The first player will\nbe determined at random.\n\n'
@@ -207,25 +216,38 @@ class BackendFuncs:
         if self.game_started != False:
             pass
         else:
-            self.game_started = True
             self.bf_name = bf_text_widget.get_text_input()
             self.gf_name = gf_text_widget.get_text_input()
-            self.players = [
-                [self.gf_name, self.GF_score, self.GF_skips, self.gf_answered_questions, self.gf_total_questions,
-                 'female', self.GF_number_of_bought_skips, self.gf_turns_of_accural, self.gf_turns_of_purchase],
-                [self.bf_name, self.BF_score, self.BF_skips, self.bf_answered_questions, self.bf_total_questions,
-                 'male', self.BF_number_of_bought_skips, self.bf_turns_of_accural, self.bf_turns_of_purchase]
-            ]
-            self.active_player_info = self.players[self.player_index]
-            question_index = self.generate_random_integer(0, len(self.questions)-1)
-            question = self.questions[question_index]
-            self.questions.pop(question_index)
-            questions_label_widget.change_text(question)
-            if self.active_player_info[5] == 'male':
-                questions_label_widget.labels[0].config(fg='#0999ff')#fg_color='0999ff'
-            elif self.active_player_info[5] == 'female':
-                questions_label_widget.labels[0].config(fg='#ff8080')#fg_color='ff8080'
-            self.current_turn = 0
+            if (self.bf_name.strip() == '') or (self.gf_name.strip() == ''):
+                pass
+            else:
+                self.game_started = True
+                self.players = [
+                    [self.gf_name, self.GF_score, self.GF_skips, self.gf_answered_questions, self.gf_total_questions,
+                    'female', self.GF_number_of_bought_skips, self.gf_turns_of_accural, self.gf_turns_of_purchase],
+                    [self.bf_name, self.BF_score, self.BF_skips, self.bf_answered_questions, self.bf_total_questions,
+                    'male', self.BF_number_of_bought_skips, self.bf_turns_of_accural, self.bf_turns_of_purchase]
+                ]
+                self.active_player_info = self.players[self.player_index]
+                question_index = self.generate_random_integer(0, len(self.questions)-1)
+                question = self.questions[question_index]
+                print(question)
+                question = question.replace(' me ', ' '+self.players[self.other_player_index][0]+' ')
+                question = question.replace(' me.', ' '+self.players[self.other_player_index][0]+'.')
+                question = question.replace(' me?', ' '+self.players[self.other_player_index][0]+'?')
+                question = question.replace(' me!', ' '+self.players[self.other_player_index][0]+'!')
+                question = question.replace(' my ', ' '+self.players[self.other_player_index][0]+"'s ")
+                question = question.replace(' my.', ' '+self.players[self.other_player_index][0]+"'s.")
+                question = question.replace(' me?', ' '+self.players[self.other_player_index][0]+"'s?'")
+                question = question.replace(' me!', ' '+self.players[self.other_player_index][0]+"'s!")
+                print(question)
+                self.questions.pop(question_index)
+                questions_label_widget.change_text(question)
+                if self.active_player_info[5] == 'male':
+                    questions_label_widget.labels[0].config(fg='#0999ff')#fg_color='0999ff'
+                elif self.active_player_info[5] == 'female':
+                    questions_label_widget.labels[0].config(fg='#ff8080')#fg_color='ff8080'
+                self.current_turn = 0
         #exit()
 
     def move_to_next_round(self, questions_label_widget):
@@ -233,6 +255,14 @@ class BackendFuncs:
         self.active_player_info = self.players[self.player_index]
         question_index = self.generate_random_integer(0, len(self.questions)-1)
         question = self.questions[question_index]
+        question = question.replace(' me ', ' '+self.players[self.other_player_index][0]+' ')
+        question = question.replace(' me.', ' '+self.players[self.other_player_index][0]+'.')
+        question = question.replace(' me?', ' '+self.players[self.other_player_index][0]+'?')
+        question = question.replace(' me!', ' '+self.players[self.other_player_index][0]+'!')
+        question = question.replace(' my ', ' '+self.players[self.other_player_index][0]+"'s ")
+        question = question.replace(' my.', ' '+self.players[self.other_player_index][0]+"'s.")
+        question = question.replace(' me?', ' '+self.players[self.other_player_index][0]+"'s?'")
+        question = question.replace(' me!', ' '+self.players[self.other_player_index][0]+"'s!")
         self.questions.pop(question_index)
         questions_label_widget.change_text(question)
         if self.active_player_info[5] == 'male':
@@ -243,12 +273,16 @@ class BackendFuncs:
     def toggle_player_index(self):
         if self.player_index == 1:
             self.player_index = 0
+            self.other_player_index = 1
         elif self.player_index == 0:
             self.player_index = 1
+            self.other_player_index = 0
         elif self.player_index % 2 == 1:
             self.player_index = 0
+            self.other_player_index = 1
         else:
             self.player_index = 1
+            self.other_player_index = 0
 
     def update_stats(self, stats_label_widget):
         stats = 'Stats:\n                 BF                 GF\nScore:            {}                 {}\nSkips:            {}                 {}'.format(
@@ -339,6 +373,7 @@ class BackendFuncs:
         else:
             if (self.players[self.player_index][8] >= 3) and (self.players[self.player_index][2] < 3):
                 self.players[self.player_index][2] = self.players[self.player_index][2] + 1
+                self.players[self.player_index][6] = self.players[self.player_index][6] + 1
                 self.players[self.player_index][8] = 0
                 self.update_player_info()
                 self.players[self.player_index][1] =  self.calculate_score(self.players[self.player_index][1],
@@ -358,600 +393,600 @@ class BackendFuncs:
         else:
             return max(current_score, (answered_questions*5)+((answered_questions/total_questions)*3)+(2*skips_bought))
     
-    def alphabatize_txt_list(self, text_doc_name, new_text_doc_name=False):
-        contents = self.get_list_of_contents(text_doc_name)
-        _contents = self.get_list_of_contents(text_doc_name)
-        contents.sort(key=str.lower)
-        if contents != _contents:
-            if new_text_doc_name == False:
-                file_name = open(text_doc_name, 'w')
-            else:
-                file_name = open(new_text_doc_name, 'w')
-            for i in contents:
-                file_name.write(i+'\n')
-            file_name.close()
+    # def alphabatize_txt_list(self, text_doc_name, new_text_doc_name=False):
+    #     contents = self.get_list_of_contents(text_doc_name)
+    #     _contents = self.get_list_of_contents(text_doc_name)
+    #     contents.sort(key=str.lower)
+    #     if contents != _contents:
+    #         if new_text_doc_name == False:
+    #             file_name = open(text_doc_name, 'w')
+    #         else:
+    #             file_name = open(new_text_doc_name, 'w')
+    #         for i in contents:
+    #             file_name.write(i+'\n')
+    #         file_name.close()
 
-    def get_folder_size(self, aFUCKINGfolder):
-        size = 0
-        for path, dirs, files in os.walk(aFUCKINGfolder):
-            for f in files:
-                fp = os.path.join(path, f)
-                size += os.stat(fp).st_size
-        return size
+    # def get_folder_size(self, aFUCKINGfolder):
+    #     size = 0
+    #     for path, dirs, files in os.walk(aFUCKINGfolder):
+    #         for f in files:
+    #             fp = os.path.join(path, f)
+    #             size += os.stat(fp).st_size
+    #     return size
 
-    def get_batch_file_message(self):
-        batch_file = open('git_update.bat', 'r')
-        msg = batch_file.read()
-        batch_file.close()
-        msg = msg.split('git commit -m "')[1].strip()
-        msg = msg.split('"')[0].strip()
-        self.write_to_log('original '+msg)
-        return msg
+    # def get_batch_file_message(self):
+    #     batch_file = open('git_update.bat', 'r')
+    #     msg = batch_file.read()
+    #     batch_file.close()
+    #     msg = msg.split('git commit -m "')[1].strip()
+    #     msg = msg.split('"')[0].strip()
+    #     self.write_to_log('original '+msg)
+    #     return msg
     
-    def update_batch_file_message(self, new_msg='update'):
-        old_msg = self.get_batch_file_message()
-        batch_file = open('git_update.bat', 'r')
-        msg = batch_file.read()
-        batch_file.close()
-        self.write_to_log(msg)
-        if old_msg == '':
-            old_msg = '""'
-            msg = msg.replace(old_msg, '"'+new_msg+'"')
-        else:
-            msg = msg.replace(old_msg, new_msg)
-        batch_file = open('git_update.bat', 'w')
-        batch_file.write(msg)
-        batch_file.close()
-        self.write_to_log(msg)
+    # def update_batch_file_message(self, new_msg='update'):
+    #     old_msg = self.get_batch_file_message()
+    #     batch_file = open('git_update.bat', 'r')
+    #     msg = batch_file.read()
+    #     batch_file.close()
+    #     self.write_to_log(msg)
+    #     if old_msg == '':
+    #         old_msg = '""'
+    #         msg = msg.replace(old_msg, '"'+new_msg+'"')
+    #     else:
+    #         msg = msg.replace(old_msg, new_msg)
+    #     batch_file = open('git_update.bat', 'w')
+    #     batch_file.write(msg)
+    #     batch_file.close()
+    #     self.write_to_log(msg)
 
-    def get_git_msg_from_box(self, textbox):
-        try:
-            new_name = str(textbox.get(1.0, "end-1c")).replace('\n', '').strip()
-        except:
-            new_name = 'update'
-        self.update_batch_file_message(new_name)
+    # def get_git_msg_from_box(self, textbox):
+    #     try:
+    #         new_name = str(textbox.get(1.0, "end-1c")).replace('\n', '').strip()
+    #     except:
+    #         new_name = 'update'
+    #     self.update_batch_file_message(new_name)
     
-    def get_unwatched_porn_hours(self):
-        animated = ''
-        filename = ''
-        comparator = '>='
-        desired_ethnicities = []
-        desired_genres = []
-        desired_pornstars = ''
-        duration = ''
-        path_in_filter = self.root_path
-        undesired_ethnicities = []
-        undesired_genres = []
-        undesired_pornstars = []
-        for genre in self.get_list_of_contents(self.genretxt):
-            if genre.strip() not in self.allowed:
-                undesired_genres.append(genre)
-        filename = ''
-        path_in_filter = self.root_path
-        filtereddataframe = self.filter_dataframe(self.dataframe, animated, desired_pornstars, 
-                                    filename, duration,
-                                    comparator, 's', desired_genres, '', desired_ethnicities,
-                                    path_in_filter, undesired_pornstars, undesired_genres,
-                                    undesired_ethnicities, set_global_filter=False)
-        return filtereddataframe['Duration'].sum()
+    # def get_unwatched_porn_hours(self):
+    #     animated = ''
+    #     filename = ''
+    #     comparator = '>='
+    #     desired_ethnicities = []
+    #     desired_genres = []
+    #     desired_pornstars = ''
+    #     duration = ''
+    #     path_in_filter = self.root_path
+    #     undesired_ethnicities = []
+    #     undesired_genres = []
+    #     undesired_pornstars = []
+    #     for genre in self.get_list_of_contents(self.genretxt):
+    #         if genre.strip() not in self.allowed:
+    #             undesired_genres.append(genre)
+    #     filename = ''
+    #     path_in_filter = self.root_path
+    #     filtereddataframe = self.filter_dataframe(self.dataframe, animated, desired_pornstars, 
+    #                                 filename, duration,
+    #                                 comparator, 's', desired_genres, '', desired_ethnicities,
+    #                                 path_in_filter, undesired_pornstars, undesired_genres,
+    #                                 undesired_ethnicities, set_global_filter=False)
+    #     return filtereddataframe['Duration'].sum()
     
-    def update_porn_hours(self, hourLable):
-        self.total_porn_hours = round((self.dataframe['Duration'].sum()) / 3600, 2)
-        self.filtered_porn_hours = round((self.filtereddataframe['Duration'].sum()) / 3600, 2)
-        self.total_unwatched_porn_hours = round((self.get_unwatched_porn_hours()) / 3600, 2)
-        self.total_watched_porn_hours = round(self.total_porn_hours - self.total_unwatched_porn_hours, 2)
-        self.total_file_size = round(self.get_folder_size(self.root_path)/1073741824, 2)
-        self.write_to_log('{}, {}, {}'.format(self.total_porn_hours, self.total_watched_porn_hours, self.total_unwatched_porn_hours))
-        watched_label = 'Total Porn Hours:\n{}\n\nTotal Watched:\n{}\n\nTotal Unwatched:\n{}\n\nFiltered Hours:\n{}\n\nTotal File Size:\n{}GB'.format(
-            self.total_porn_hours,
-            self.total_watched_porn_hours,
-            self.total_unwatched_porn_hours,
-            self.filtered_porn_hours,
-            self.total_file_size
-        )
-        Total_Hours_of_Porn = Label_Widget(Tk)
-        if type(hourLable) == type(Total_Hours_of_Porn):
-            hourLable.change_text(watched_label)
+    # def update_porn_hours(self, hourLable):
+    #     self.total_porn_hours = round((self.dataframe['Duration'].sum()) / 3600, 2)
+    #     self.filtered_porn_hours = round((self.filtereddataframe['Duration'].sum()) / 3600, 2)
+    #     self.total_unwatched_porn_hours = round((self.get_unwatched_porn_hours()) / 3600, 2)
+    #     self.total_watched_porn_hours = round(self.total_porn_hours - self.total_unwatched_porn_hours, 2)
+    #     self.total_file_size = round(self.get_folder_size(self.root_path)/1073741824, 2)
+    #     self.write_to_log('{}, {}, {}'.format(self.total_porn_hours, self.total_watched_porn_hours, self.total_unwatched_porn_hours))
+    #     watched_label = 'Total Porn Hours:\n{}\n\nTotal Watched:\n{}\n\nTotal Unwatched:\n{}\n\nFiltered Hours:\n{}\n\nTotal File Size:\n{}GB'.format(
+    #         self.total_porn_hours,
+    #         self.total_watched_porn_hours,
+    #         self.total_unwatched_porn_hours,
+    #         self.filtered_porn_hours,
+    #         self.total_file_size
+    #     )
+    #     Total_Hours_of_Porn = Label_Widget(Tk)
+    #     if type(hourLable) == type(Total_Hours_of_Porn):
+    #         hourLable.change_text(watched_label)
 
-    def replace_text_in_textfile(self, filename, oldstring='\n\n', newstring='\n', justAddingToEnd=False):
-        file_name = open(filename, 'r')
-        text = file_name.read()
-        file_name.close()
-        if text.__contains__(oldstring):
-            self.write_to_log('{} contains {} and will be replaced with {}'.format(filename, oldstring, newstring))
-            text = text.replace(oldstring, newstring)
-            file_name = open(filename, 'w')
-            file_name.write(text)
-            file_name.close()
-        else:
-            self.write_to_log('{} does not contain {} and so it will not be replaced with {}'.format(filename, oldstring, newstring))
-            if justAddingToEnd:
-                text = text.strip()+'\n'+newstring
-                file_name = open(filename, 'w')
-                file_name.write(text)
-                file_name.close()
+    # def replace_text_in_textfile(self, filename, oldstring='\n\n', newstring='\n', justAddingToEnd=False):
+    #     file_name = open(filename, 'r')
+    #     text = file_name.read()
+    #     file_name.close()
+    #     if text.__contains__(oldstring):
+    #         self.write_to_log('{} contains {} and will be replaced with {}'.format(filename, oldstring, newstring))
+    #         text = text.replace(oldstring, newstring)
+    #         file_name = open(filename, 'w')
+    #         file_name.write(text)
+    #         file_name.close()
+    #     else:
+    #         self.write_to_log('{} does not contain {} and so it will not be replaced with {}'.format(filename, oldstring, newstring))
+    #         if justAddingToEnd:
+    #             text = text.strip()+'\n'+newstring
+    #             file_name = open(filename, 'w')
+    #             file_name.write(text)
+    #             file_name.close()
 
-    def initial_update(self):
-        master_done = False
-        iterations = 0
-        while (not master_done) and iterations <= 3:
-            iterations = iterations + 1
-            list_of_known_paths = self.list_from_dataframe(self.dataframe, 'Path')
-            list_of_known_videos = self.list_from_dataframe(self.dataframe, 'Filename')
-            list_of_known_files = []
-            if len(list_of_known_paths) == len(list_of_known_videos):
-                for i in range(0, len(list_of_known_videos)):
-                    pathe = list_of_known_paths[i]
-                    vid = list_of_known_videos[i]
-                    list_of_known_files.append(os.path.join(pathe, vid))
-                list_of_known_files = list(set(list_of_known_files))
-            else:
-                self.write_to_log('The number of filenames does not match the number of paths')
-            list_of_all_videos = self.get_all_videos_from_root(self.root_path)
-            paths_to_check = []
-            list_of_all_videos.sort(key=str.lower)
-            list_of_known_files.sort(key=str.lower)
-            if list_of_all_videos == list_of_known_files:
-                self.write_to_log('All videos are accounted for')
-                skip = True
-            elif len(list_of_all_videos) > len(list_of_known_files):
-                skip = False
-                self.write_to_log('There are more videos in root than known')
-                self.write_to_log('All {}; Known {}'.format(len(list_of_all_videos), len(list_of_known_files)))
-                for file in list_of_all_videos:
-                    if file not in list_of_known_files:
-                        path, name = os.path.split(file)
-                        if path not in paths_to_check:
-                            paths_to_check.append(path)
-            elif len(list_of_all_videos) < len(list_of_known_files):
-                skip = False
-                self.write_to_log('There are more videos in known than root')
-                self.write_to_log('All {}; Known {}'.format(len(list_of_all_videos), len(list_of_known_files)))
-                for file in list_of_known_files:
-                    if file not in list_of_all_videos: #then we know it does not exist
-                        path, name = os.path.split(file)
-                        if path not in paths_to_check:
-                            paths_to_check.append(path)
-                        filteredframe = self.filter_dataframe(self.dataframe, Filename=name)
-                        if len(filteredframe) == 0:
-                            self.dataframe = self.remove_row_from_dataframe(self.dataframe, name, path)
-                        elif len(filteredframe) == 1:
-                            rowI = self.get_row_index(filteredframe, name, path)
-                            p = self.get_value_at_cell(rowI, 'Path', filteredframe)
-                            n = self.get_value_at_cell(rowI, 'Filename', filteredframe)
-                            self.dataframe = self.remove_row_from_dataframe(self.dataframe, n, p)
-                        elif (name.lower().__contains__('psi')) and (len(filteredframe) != 0):
-                            self.write_to_log('!')
-                            self.write_to_log(filteredframe)
-                self.dataframe.replace(float('nan'), '')
-                self.dataframe.replace(',nan,', '')
-                self.dataframe.to_csv(self.the_csv, index=False)
-                list_of_known_paths = self.list_from_dataframe(self.dataframe, 'Path')
-                list_of_known_videos = self.list_from_dataframe(self.dataframe, 'Filename')
-                list_of_known_files = []
-                for i in range(0, len(list_of_known_videos)):
-                    pathe = list_of_known_paths[i]
-                    vid = list_of_known_videos[i]
-                    list_of_known_files.append(os.path.join(pathe, vid))
-                list_of_known_files = list(set(list_of_known_files))
-                list_of_known_files.sort(key=str.lower)
-                if list_of_known_files == list_of_all_videos:
-                    self.write_to_log('they match now')
-                    skip = True
-            elif len(list_of_all_videos) == len(list_of_known_files):
-                self.write_to_log('The number of videos is the same but these lists are not equivalent')
-                if iterations > 1:
-                    list_of_known_filesL = [element.lower() for element in list_of_known_files]
-                    list_of_all_videosL = [element.lower() for element in list_of_all_videos]
-                    if list_of_all_videosL == list_of_known_filesL:
-                        self.write_to_log('For whatever reason there is a case difference but all of the file names are there')
-                        for index in range(0, len(list_of_all_videos)):
-                            shin_name = list_of_all_videos[index]
-                            faux_name = list_of_known_files[index]
-                            if not (shin_name == faux_name):
-                                self.write_to_log('A case difference was found:\nReal name: {}\nCSV name: {}'.format(shin_name,
-                                                                                                        faux_name))
-                                shin_path, shin_name = os.path.split(shin_name)
-                                shin_extension = shin_name.split('.')[1]
-                                faux_path, faux_name = os.path.split(faux_name)
-                                faux_extension = faux_name.split('.')[1]
-                                if shin_path == faux_path:
-                                    self.write_to_log('The paths are good.  They both are:\n{}'.format(shin_path))
-                                else:
-                                    self.dataframe = self.edit_dataframe(self.dataframe, faux_name, faux_path,
-                                                                        'Path', shin_path)
-                                    self.write_to_log('The path was updated from:\n{}\nto\n{}'.format(faux_path, shin_path))
-                                if shin_name == faux_name:
-                                    self.write_to_log('The names are good.  They both are:\n{}'.format(shin_name))
-                                else:
-                                    try:
-                                        self.dataframe = self.edit_dataframe(self.dataframe, faux_name, shin_path,
-                                                                            'Filename', shin_name)
-                                    except:
-                                        self.write_to_log('{}, {}, {}, {}'.format(faux_name, shin_path, 'Filename', shin_name))
-                                        exit()
-                                if shin_extension == faux_extension:
-                                    self.write_to_log('The extensions are good.  They both are:\n{}'.format(shin_extension))
-                                else:
-                                    self.dataframe = self.edit_dataframe(self.dataframe, shin_name, shin_path,
-                                                                        'Filetype', shin_extension)
-                                    self.write_to_log('The extension was updated from:\n{}\nto\n{}'.format(faux_extension,
-                                                                                               shin_extension))
-                        self.dataframe.to_csv(self.the_csv, index=False)
-                else:
-                    skip = False
-                    nonexistent_files = []
-                    for full_file in list_of_known_files:
-                        if full_file not in list_of_all_videos:
-                            nonexistent_files.append(full_file)
-                    for full_file in nonexistent_files:
-                        pathe, name = os.path.split(full_file)
-                        for path in self.get_all_folders_from_root(self.root_path):
-                            if os.path.exists(os.path.join(path, name)):
-                                self.dataframe = self.edit_dataframe(self.dataframe, name, pathe, 'Path', path)
-                    list_of_known_paths = self.list_from_dataframe(self.dataframe, 'Path')
-                    list_of_known_videos = self.list_from_dataframe(self.dataframe, 'Filename')
-                    if len(list_of_known_paths) == len(list_of_known_videos):
-                        if len(list_of_all_videos) == len(list_of_known_files):
-                            self.write_to_log('lengths still match')
-                        list_of_known_files = []
-                        for i in range(0, len(list_of_known_videos)):
-                            pathe = list_of_known_paths[i]
-                            vid = list_of_known_videos[i]
-                            list_of_known_files.append(os.path.join(pathe, vid))
-                        list_of_known_files = list(set(list_of_known_files))
-                        list_of_known_files.sort(key=str.lower)
-                    if not (list_of_all_videos == list_of_known_files):
-                        self.write_to_log('There is still a mismatch')
-                        for file in list_of_known_files:
-                            if file not in list_of_all_videos:
-                                self.write_to_log(file)
-                    else:
-                        skip = True
-                        self.write_to_log('skip = True')
-                        self.dataframe.to_csv(self.the_csv, index=False)
-            else:
-                self.write_to_log('This should never happen')
-                skip = True
-            if not skip:
-                done = False
-                while not done:
-                    self.write_to_log('Must check:')
-                    self.write_to_log(paths_to_check)
-                    upper_paths = []
-                    for path in paths_to_check:
-                        if not os.path.exists(path):
-                            self.write_to_log('{} not longer exists'.format(path))
-                            up_path = os.path.abspath(os.path.join(path, os.pardir))
-                            if up_path not in upper_paths:
-                                upper_paths.append(up_path)
-                        elif len(os.listdir(path)) < 1:
-                            self.write_to_log('{} has {} files'.format(os.listdir(path), len(os.listdir(path))))
-                            up_path = os.path.abspath(os.path.join(path, os.pardir))
-                            if up_path not in upper_paths:
-                                upper_paths.append(up_path)
-                        else:
-                            self.update_csv(self.get_all_videos_from_root(path), self.the_csv)
-                            self.check_existence_of_videos_from_directory(path)
-                            self.dataframe.replace(',nan,', '')
-                            self.dataframe.replace(float('nan'), '')
-                            self.dataframe.to_csv(self.the_csv, index=False)
-                            self.start_file('git_update.bat', False)
-                            self.dataframe = pd.read_csv(self.the_csv, delimiter=',', header=0,
-                                                skip_blank_lines=True, na_values='') 
-                    if upper_paths == []:
-                        done = True
-                    elif self.root_path in upper_paths:
-                        done = True
-                    else:
-                        paths_to_check = []
-                        for item in upper_paths:
-                            paths_to_check.append(item)
-            else:
-                master_done = True
+    # def initial_update(self):
+    #     master_done = False
+    #     iterations = 0
+    #     while (not master_done) and iterations <= 3:
+    #         iterations = iterations + 1
+    #         list_of_known_paths = self.list_from_dataframe(self.dataframe, 'Path')
+    #         list_of_known_videos = self.list_from_dataframe(self.dataframe, 'Filename')
+    #         list_of_known_files = []
+    #         if len(list_of_known_paths) == len(list_of_known_videos):
+    #             for i in range(0, len(list_of_known_videos)):
+    #                 pathe = list_of_known_paths[i]
+    #                 vid = list_of_known_videos[i]
+    #                 list_of_known_files.append(os.path.join(pathe, vid))
+    #             list_of_known_files = list(set(list_of_known_files))
+    #         else:
+    #             self.write_to_log('The number of filenames does not match the number of paths')
+    #         list_of_all_videos = self.get_all_videos_from_root(self.root_path)
+    #         paths_to_check = []
+    #         list_of_all_videos.sort(key=str.lower)
+    #         list_of_known_files.sort(key=str.lower)
+    #         if list_of_all_videos == list_of_known_files:
+    #             self.write_to_log('All videos are accounted for')
+    #             skip = True
+    #         elif len(list_of_all_videos) > len(list_of_known_files):
+    #             skip = False
+    #             self.write_to_log('There are more videos in root than known')
+    #             self.write_to_log('All {}; Known {}'.format(len(list_of_all_videos), len(list_of_known_files)))
+    #             for file in list_of_all_videos:
+    #                 if file not in list_of_known_files:
+    #                     path, name = os.path.split(file)
+    #                     if path not in paths_to_check:
+    #                         paths_to_check.append(path)
+    #         elif len(list_of_all_videos) < len(list_of_known_files):
+    #             skip = False
+    #             self.write_to_log('There are more videos in known than root')
+    #             self.write_to_log('All {}; Known {}'.format(len(list_of_all_videos), len(list_of_known_files)))
+    #             for file in list_of_known_files:
+    #                 if file not in list_of_all_videos: #then we know it does not exist
+    #                     path, name = os.path.split(file)
+    #                     if path not in paths_to_check:
+    #                         paths_to_check.append(path)
+    #                     filteredframe = self.filter_dataframe(self.dataframe, Filename=name)
+    #                     if len(filteredframe) == 0:
+    #                         self.dataframe = self.remove_row_from_dataframe(self.dataframe, name, path)
+    #                     elif len(filteredframe) == 1:
+    #                         rowI = self.get_row_index(filteredframe, name, path)
+    #                         p = self.get_value_at_cell(rowI, 'Path', filteredframe)
+    #                         n = self.get_value_at_cell(rowI, 'Filename', filteredframe)
+    #                         self.dataframe = self.remove_row_from_dataframe(self.dataframe, n, p)
+    #                     elif (name.lower().__contains__('psi')) and (len(filteredframe) != 0):
+    #                         self.write_to_log('!')
+    #                         self.write_to_log(filteredframe)
+    #             self.dataframe.replace(float('nan'), '')
+    #             self.dataframe.replace(',nan,', '')
+    #             self.dataframe.to_csv(self.the_csv, index=False)
+    #             list_of_known_paths = self.list_from_dataframe(self.dataframe, 'Path')
+    #             list_of_known_videos = self.list_from_dataframe(self.dataframe, 'Filename')
+    #             list_of_known_files = []
+    #             for i in range(0, len(list_of_known_videos)):
+    #                 pathe = list_of_known_paths[i]
+    #                 vid = list_of_known_videos[i]
+    #                 list_of_known_files.append(os.path.join(pathe, vid))
+    #             list_of_known_files = list(set(list_of_known_files))
+    #             list_of_known_files.sort(key=str.lower)
+    #             if list_of_known_files == list_of_all_videos:
+    #                 self.write_to_log('they match now')
+    #                 skip = True
+    #         elif len(list_of_all_videos) == len(list_of_known_files):
+    #             self.write_to_log('The number of videos is the same but these lists are not equivalent')
+    #             if iterations > 1:
+    #                 list_of_known_filesL = [element.lower() for element in list_of_known_files]
+    #                 list_of_all_videosL = [element.lower() for element in list_of_all_videos]
+    #                 if list_of_all_videosL == list_of_known_filesL:
+    #                     self.write_to_log('For whatever reason there is a case difference but all of the file names are there')
+    #                     for index in range(0, len(list_of_all_videos)):
+    #                         shin_name = list_of_all_videos[index]
+    #                         faux_name = list_of_known_files[index]
+    #                         if not (shin_name == faux_name):
+    #                             self.write_to_log('A case difference was found:\nReal name: {}\nCSV name: {}'.format(shin_name,
+    #                                                                                                     faux_name))
+    #                             shin_path, shin_name = os.path.split(shin_name)
+    #                             shin_extension = shin_name.split('.')[1]
+    #                             faux_path, faux_name = os.path.split(faux_name)
+    #                             faux_extension = faux_name.split('.')[1]
+    #                             if shin_path == faux_path:
+    #                                 self.write_to_log('The paths are good.  They both are:\n{}'.format(shin_path))
+    #                             else:
+    #                                 self.dataframe = self.edit_dataframe(self.dataframe, faux_name, faux_path,
+    #                                                                     'Path', shin_path)
+    #                                 self.write_to_log('The path was updated from:\n{}\nto\n{}'.format(faux_path, shin_path))
+    #                             if shin_name == faux_name:
+    #                                 self.write_to_log('The names are good.  They both are:\n{}'.format(shin_name))
+    #                             else:
+    #                                 try:
+    #                                     self.dataframe = self.edit_dataframe(self.dataframe, faux_name, shin_path,
+    #                                                                         'Filename', shin_name)
+    #                                 except:
+    #                                     self.write_to_log('{}, {}, {}, {}'.format(faux_name, shin_path, 'Filename', shin_name))
+    #                                     exit()
+    #                             if shin_extension == faux_extension:
+    #                                 self.write_to_log('The extensions are good.  They both are:\n{}'.format(shin_extension))
+    #                             else:
+    #                                 self.dataframe = self.edit_dataframe(self.dataframe, shin_name, shin_path,
+    #                                                                     'Filetype', shin_extension)
+    #                                 self.write_to_log('The extension was updated from:\n{}\nto\n{}'.format(faux_extension,
+    #                                                                                            shin_extension))
+    #                     self.dataframe.to_csv(self.the_csv, index=False)
+    #             else:
+    #                 skip = False
+    #                 nonexistent_files = []
+    #                 for full_file in list_of_known_files:
+    #                     if full_file not in list_of_all_videos:
+    #                         nonexistent_files.append(full_file)
+    #                 for full_file in nonexistent_files:
+    #                     pathe, name = os.path.split(full_file)
+    #                     for path in self.get_all_folders_from_root(self.root_path):
+    #                         if os.path.exists(os.path.join(path, name)):
+    #                             self.dataframe = self.edit_dataframe(self.dataframe, name, pathe, 'Path', path)
+    #                 list_of_known_paths = self.list_from_dataframe(self.dataframe, 'Path')
+    #                 list_of_known_videos = self.list_from_dataframe(self.dataframe, 'Filename')
+    #                 if len(list_of_known_paths) == len(list_of_known_videos):
+    #                     if len(list_of_all_videos) == len(list_of_known_files):
+    #                         self.write_to_log('lengths still match')
+    #                     list_of_known_files = []
+    #                     for i in range(0, len(list_of_known_videos)):
+    #                         pathe = list_of_known_paths[i]
+    #                         vid = list_of_known_videos[i]
+    #                         list_of_known_files.append(os.path.join(pathe, vid))
+    #                     list_of_known_files = list(set(list_of_known_files))
+    #                     list_of_known_files.sort(key=str.lower)
+    #                 if not (list_of_all_videos == list_of_known_files):
+    #                     self.write_to_log('There is still a mismatch')
+    #                     for file in list_of_known_files:
+    #                         if file not in list_of_all_videos:
+    #                             self.write_to_log(file)
+    #                 else:
+    #                     skip = True
+    #                     self.write_to_log('skip = True')
+    #                     self.dataframe.to_csv(self.the_csv, index=False)
+    #         else:
+    #             self.write_to_log('This should never happen')
+    #             skip = True
+    #         if not skip:
+    #             done = False
+    #             while not done:
+    #                 self.write_to_log('Must check:')
+    #                 self.write_to_log(paths_to_check)
+    #                 upper_paths = []
+    #                 for path in paths_to_check:
+    #                     if not os.path.exists(path):
+    #                         self.write_to_log('{} not longer exists'.format(path))
+    #                         up_path = os.path.abspath(os.path.join(path, os.pardir))
+    #                         if up_path not in upper_paths:
+    #                             upper_paths.append(up_path)
+    #                     elif len(os.listdir(path)) < 1:
+    #                         self.write_to_log('{} has {} files'.format(os.listdir(path), len(os.listdir(path))))
+    #                         up_path = os.path.abspath(os.path.join(path, os.pardir))
+    #                         if up_path not in upper_paths:
+    #                             upper_paths.append(up_path)
+    #                     else:
+    #                         self.update_csv(self.get_all_videos_from_root(path), self.the_csv)
+    #                         self.check_existence_of_videos_from_directory(path)
+    #                         self.dataframe.replace(',nan,', '')
+    #                         self.dataframe.replace(float('nan'), '')
+    #                         self.dataframe.to_csv(self.the_csv, index=False)
+    #                         self.start_file('git_update.bat', False)
+    #                         self.dataframe = pd.read_csv(self.the_csv, delimiter=',', header=0,
+    #                                             skip_blank_lines=True, na_values='') 
+    #                 if upper_paths == []:
+    #                     done = True
+    #                 elif self.root_path in upper_paths:
+    #                     done = True
+    #                 else:
+    #                     paths_to_check = []
+    #                     for item in upper_paths:
+    #                         paths_to_check.append(item)
+    #         else:
+    #             master_done = True
 
-    def check_existence_of_videos_from_directory(self, directory):
-        sus_dataframe = self.filter_dataframe(self.dataframe, Path=directory)
-        for file in self.list_of_filez_from_dataframe(sus_dataframe):
-            if not os.path.exists(file):
-                self.write_to_log('{} seems to no longer exist'.format(file))
-                path, name = os.path.split(file)
-                self.dataframe = self.remove_row_from_dataframe(self.dataframe, name, path)
+    # def check_existence_of_videos_from_directory(self, directory):
+    #     sus_dataframe = self.filter_dataframe(self.dataframe, Path=directory)
+    #     for file in self.list_of_filez_from_dataframe(sus_dataframe):
+    #         if not os.path.exists(file):
+    #             self.write_to_log('{} seems to no longer exist'.format(file))
+    #             path, name = os.path.split(file)
+    #             self.dataframe = self.remove_row_from_dataframe(self.dataframe, name, path)
 
-    def ave_num_char(self, heading):
-        names = []
-        for index in range(0, len(self.dataframe)):
-            names.append(len(self.get_value_at_cell(index, heading, self.dataframe)))
-        self.write_to_log('{}, {}, {}'.format(max(names), min(names), int((max(names)+min(names))/2)))
+    # def ave_num_char(self, heading):
+    #     names = []
+    #     for index in range(0, len(self.dataframe)):
+    #         names.append(len(self.get_value_at_cell(index, heading, self.dataframe)))
+    #     self.write_to_log('{}, {}, {}'.format(max(names), min(names), int((max(names)+min(names))/2)))
 
-    def add_pornstars_to_search(self, listbox, filterButtonWidget):
-        if self.desired_or_undesired == self.desired_or_undesired_options[0]:
-            self.get_multiple_selection(listbox, self.desired_pornstars)
-            self.write_to_log(self.desired_pornstars)
-        elif self.desired_or_undesired == self.desired_or_undesired_options[1]:
-            self.get_multiple_selection(listbox, self.undesired_pornstars)
-            self.write_to_log(self.undesired_pornstars)
-        else:
-            self.write_to_log('Was {} which is not valid.  It is now set to {}'.format(self.desired_or_undesired_options[0]))
-            self.get_multiple_selection(listbox, self.desired_pornstars)
-            self.write_to_log(self.desired_pornstars)
-        listbox.selection_clear(0, 'end')
-        filterButtonWidget.change_color(background='#09f042')
+    # def add_pornstars_to_search(self, listbox, filterButtonWidget):
+    #     if self.desired_or_undesired == self.desired_or_undesired_options[0]:
+    #         self.get_multiple_selection(listbox, self.desired_pornstars)
+    #         self.write_to_log(self.desired_pornstars)
+    #     elif self.desired_or_undesired == self.desired_or_undesired_options[1]:
+    #         self.get_multiple_selection(listbox, self.undesired_pornstars)
+    #         self.write_to_log(self.undesired_pornstars)
+    #     else:
+    #         self.write_to_log('Was {} which is not valid.  It is now set to {}'.format(self.desired_or_undesired_options[0]))
+    #         self.get_multiple_selection(listbox, self.desired_pornstars)
+    #         self.write_to_log(self.desired_pornstars)
+    #     listbox.selection_clear(0, 'end')
+    #     filterButtonWidget.change_color(background='#09f042')
 
-    def add_genres_to_search(self, listbox, filterButtonWidget):
-        if self.desired_or_undesired == self.desired_or_undesired_options[0]:
-            self.get_multiple_selection(listbox, self.desired_genres)
-            self.write_to_log(self.desired_genres)
-        elif self.desired_or_undesired == self.desired_or_undesired_options[1]:
-            self.get_multiple_selection(listbox, self.undesired_genres)
-            self.write_to_log(self.undesired_genres)
-        else:
-            self.write_to_log('Was {} which is not valid.  It is now set to {}'.format(self.desired_or_undesired_options[0]))
-            self.get_multiple_selection(listbox, self.desired_genres)
-            self.write_to_log(self.desired_genres)
-        listbox.selection_clear(0, 'end')
-        filterButtonWidget.change_color(background='#09f042')
+    # def add_genres_to_search(self, listbox, filterButtonWidget):
+    #     if self.desired_or_undesired == self.desired_or_undesired_options[0]:
+    #         self.get_multiple_selection(listbox, self.desired_genres)
+    #         self.write_to_log(self.desired_genres)
+    #     elif self.desired_or_undesired == self.desired_or_undesired_options[1]:
+    #         self.get_multiple_selection(listbox, self.undesired_genres)
+    #         self.write_to_log(self.undesired_genres)
+    #     else:
+    #         self.write_to_log('Was {} which is not valid.  It is now set to {}'.format(self.desired_or_undesired_options[0]))
+    #         self.get_multiple_selection(listbox, self.desired_genres)
+    #         self.write_to_log(self.desired_genres)
+    #     listbox.selection_clear(0, 'end')
+    #     filterButtonWidget.change_color(background='#09f042')
 
-    def add_ethnicities_to_search(self, listbox, filterButtonWidget):
-        if self.desired_or_undesired == self.desired_or_undesired_options[0]:
-            self.get_multiple_selection(listbox, self.desired_ethnicities)
-            self.write_to_log(self.desired_ethnicities)
-        elif self.desired_or_undesired == self.desired_or_undesired_options[1]:
-            self.get_multiple_selection(listbox, self.undesired_ethnicities)
-            self.write_to_log(self.undesired_ethnicities)
-        else:
-            self.write_to_log('Was {} which is not valid.  It is now set to {}'.format(self.desired_or_undesired_options[0]))
-            self.get_multiple_selection(listbox, self.desired_ethnicities)
-            self.write_to_log(self.desired_ethnicities)
-        listbox.selection_clear(0, 'end')
-        filterButtonWidget.change_color(background='#09f042')
+    # def add_ethnicities_to_search(self, listbox, filterButtonWidget):
+    #     if self.desired_or_undesired == self.desired_or_undesired_options[0]:
+    #         self.get_multiple_selection(listbox, self.desired_ethnicities)
+    #         self.write_to_log(self.desired_ethnicities)
+    #     elif self.desired_or_undesired == self.desired_or_undesired_options[1]:
+    #         self.get_multiple_selection(listbox, self.undesired_ethnicities)
+    #         self.write_to_log(self.undesired_ethnicities)
+    #     else:
+    #         self.write_to_log('Was {} which is not valid.  It is now set to {}'.format(self.desired_or_undesired_options[0]))
+    #         self.get_multiple_selection(listbox, self.desired_ethnicities)
+    #         self.write_to_log(self.desired_ethnicities)
+    #     listbox.selection_clear(0, 'end')
+    #     filterButtonWidget.change_color(background='#09f042')
 
-    def remove_pornstars_from_search(self, listbox, buttonWiget):
-        if self.desired_or_undesired == self.desired_or_undesired_options[0]:
-            self.get_multiple_selections_removed(listbox, self.desired_pornstars)
-            self.write_to_log(self.desired_pornstars)
-        elif self.desired_or_undesired == self.desired_or_undesired_options[1]:
-            self.get_multiple_selections_removed(listbox, self.undesired_pornstars)
-            self.write_to_log(self.undesired_pornstars)
-        else:
-            self.write_to_log('Was {} which is not valid.  It is now set to {}'.format(self.desired_or_undesired_options[0]))
-            self.get_multiple_selections_removed(listbox, self.desired_pornstars)
-            self.write_to_log(self.desired_pornstars)
-        listbox.selection_clear(0, 'end')
-        if self.there_are_filters():
-            buttonWiget.change_color(background='#f04209')
-        else:
-            buttonWiget.change_color(background='#09f042')
+    # def remove_pornstars_from_search(self, listbox, buttonWiget):
+    #     if self.desired_or_undesired == self.desired_or_undesired_options[0]:
+    #         self.get_multiple_selections_removed(listbox, self.desired_pornstars)
+    #         self.write_to_log(self.desired_pornstars)
+    #     elif self.desired_or_undesired == self.desired_or_undesired_options[1]:
+    #         self.get_multiple_selections_removed(listbox, self.undesired_pornstars)
+    #         self.write_to_log(self.undesired_pornstars)
+    #     else:
+    #         self.write_to_log('Was {} which is not valid.  It is now set to {}'.format(self.desired_or_undesired_options[0]))
+    #         self.get_multiple_selections_removed(listbox, self.desired_pornstars)
+    #         self.write_to_log(self.desired_pornstars)
+    #     listbox.selection_clear(0, 'end')
+    #     if self.there_are_filters():
+    #         buttonWiget.change_color(background='#f04209')
+    #     else:
+    #         buttonWiget.change_color(background='#09f042')
 
-    def remove_genres_from_search(self, listbox, buttonWiget):
-        if self.desired_or_undesired == self.desired_or_undesired_options[0]:
-            self.get_multiple_selections_removed(listbox, self.desired_genres)
-            self.write_to_log(self.desired_genres)
-        elif self.desired_or_undesired == self.desired_or_undesired_options[1]:
-            self.get_multiple_selections_removed(listbox, self.undesired_genres)
-            self.write_to_log(self.undesired_genres)
-        else:
-            self.write_to_log('Was {} which is not valid.  It is now set to {}'.format(self.desired_or_undesired_options[0]))
-            self.get_multiple_selections_removed(listbox, self.desired_genres)
-            self.write_to_log(self.desired_genres)
-        listbox.selection_clear(0, 'end')
-        if self.there_are_filters():
-            buttonWiget.change_color(background='#f04209')
-        else:
-            buttonWiget.change_color(background='#09f042')
+    # def remove_genres_from_search(self, listbox, buttonWiget):
+    #     if self.desired_or_undesired == self.desired_or_undesired_options[0]:
+    #         self.get_multiple_selections_removed(listbox, self.desired_genres)
+    #         self.write_to_log(self.desired_genres)
+    #     elif self.desired_or_undesired == self.desired_or_undesired_options[1]:
+    #         self.get_multiple_selections_removed(listbox, self.undesired_genres)
+    #         self.write_to_log(self.undesired_genres)
+    #     else:
+    #         self.write_to_log('Was {} which is not valid.  It is now set to {}'.format(self.desired_or_undesired_options[0]))
+    #         self.get_multiple_selections_removed(listbox, self.desired_genres)
+    #         self.write_to_log(self.desired_genres)
+    #     listbox.selection_clear(0, 'end')
+    #     if self.there_are_filters():
+    #         buttonWiget.change_color(background='#f04209')
+    #     else:
+    #         buttonWiget.change_color(background='#09f042')
 
-    def remove_ethnicities_from_search(self, listbox, buttonWiget):
-        if self.desired_or_undesired == self.desired_or_undesired_options[0]:
-            self.get_multiple_selections_removed(listbox, self.desired_ethnicities)
-            self.write_to_log(self.desired_ethnicities)
-        elif self.desired_or_undesired == self.desired_or_undesired_options[1]:
-            self.get_multiple_selections_removed(listbox, self.undesired_ethnicities)
-            self.write_to_log(self.undesired_ethnicities)
-        else:
-            self.write_to_log('Was {} which is not valid.  It is now set to {}'.format(self.desired_or_undesired_options[0]))
-            self.get_multiple_selections_removed(listbox, self.desired_ethnicities)
-            self.write_to_log(self.desired_ethnicities)
-        listbox.selection_clear(0, 'end')
-        if self.there_are_filters():
-            buttonWiget.change_color(background='#f04209')
-        else:
-            buttonWiget.change_color(background='#09f042')
+    # def remove_ethnicities_from_search(self, listbox, buttonWiget):
+    #     if self.desired_or_undesired == self.desired_or_undesired_options[0]:
+    #         self.get_multiple_selections_removed(listbox, self.desired_ethnicities)
+    #         self.write_to_log(self.desired_ethnicities)
+    #     elif self.desired_or_undesired == self.desired_or_undesired_options[1]:
+    #         self.get_multiple_selections_removed(listbox, self.undesired_ethnicities)
+    #         self.write_to_log(self.undesired_ethnicities)
+    #     else:
+    #         self.write_to_log('Was {} which is not valid.  It is now set to {}'.format(self.desired_or_undesired_options[0]))
+    #         self.get_multiple_selections_removed(listbox, self.desired_ethnicities)
+    #         self.write_to_log(self.desired_ethnicities)
+    #     listbox.selection_clear(0, 'end')
+    #     if self.there_are_filters():
+    #         buttonWiget.change_color(background='#f04209')
+    #     else:
+    #         buttonWiget.change_color(background='#09f042')
     
-    def there_are_filters(self):
-        val = False
-        if self.desired_ethnicities == []:
-            if self.undesired_ethnicities == []:
-                if (self.desired_genres == []) and (self.undesired_genres == []):
-                    if (self.undesired_pornstars == []) and (self.desired_pornstars == []):
-                        if (self.animated == '') and (self.filename == ''):
-                            if (self.path_in_filter == self.root_path) or (self.path_in_filter == ''):
-                                if (self.range_selected == False) and (self.duration < 1):
-                                    val = True
-                                elif (self.range_selected == True):
-                                    if (self.upper_duration > 5*60*60) and (self.lower_duration < 2):
-                                        val = True
-                                if (val):
-                                    if not (len(self.dataframe) == len(self.filtereddataframe)):
-                                        val = False
-                                    if val:
-                                        self.video_completeness = 'incomplete/complete'
-        return val
+    # def there_are_filters(self):
+    #     val = False
+    #     if self.desired_ethnicities == []:
+    #         if self.undesired_ethnicities == []:
+    #             if (self.desired_genres == []) and (self.undesired_genres == []):
+    #                 if (self.undesired_pornstars == []) and (self.desired_pornstars == []):
+    #                     if (self.animated == '') and (self.filename == ''):
+    #                         if (self.path_in_filter == self.root_path) or (self.path_in_filter == ''):
+    #                             if (self.range_selected == False) and (self.duration < 1):
+    #                                 val = True
+    #                             elif (self.range_selected == True):
+    #                                 if (self.upper_duration > 5*60*60) and (self.lower_duration < 2):
+    #                                     val = True
+    #                             if (val):
+    #                                 if not (len(self.dataframe) == len(self.filtereddataframe)):
+    #                                     val = False
+    #                                 if val:
+    #                                     self.video_completeness = 'incomplete/complete'
+    #     return val
     
-    def get_multiple_selection(self, listbox, liste):
-        for selection in listbox.curselection():
-            if listbox.get(selection) not in liste:
-                liste.append(listbox.get(selection))
-        return liste
+    # def get_multiple_selection(self, listbox, liste):
+    #     for selection in listbox.curselection():
+    #         if listbox.get(selection) not in liste:
+    #             liste.append(listbox.get(selection))
+    #     return liste
     
-    def get_multiple_selections_removed(self, listbox, liste):
-        for selection in listbox.curselection():
-            if listbox.get(selection) in liste:
-                liste.remove(listbox.get(selection))
-        return liste
+    # def get_multiple_selections_removed(self, listbox, liste):
+    #     for selection in listbox.curselection():
+    #         if listbox.get(selection) in liste:
+    #             liste.remove(listbox.get(selection))
+    #     return liste
 
-    def get_list_of_contents(self, filename):
-        file = open(filename, 'r')
-        contents = file.readlines()
-        file.close()
-        real_list = []
-        for content in contents:
-            real_list.append(content.replace('\n', '').strip())
-        return real_list
+    # def get_list_of_contents(self, filename):
+    #     file = open(filename, 'r')
+    #     contents = file.readlines()
+    #     file.close()
+    #     real_list = []
+    #     for content in contents:
+    #         real_list.append(content.replace('\n', '').strip())
+    #     return real_list
     
-    def set_selection(self, selection, buttonWiget):
-        if selection in self.selections:
-            self.selection = selection
-            self.write_to_log('{} is selected'.format(selection))
-        elif type(selection) == type(Label()):
-            if self.animated == '':
-                self.animated = 'True'
-            elif self.animated == 'True':
-                self.animated = 'False'
-            elif self.animated == 'False':
-                self.animated = ''
-            self.selection = selection
-            self.write_to_log('{} is selected'.format(selection))
-            selection.config(text=self.animated)
-        else:
-            self.write_to_log('{} is not allowed'.format(selection))
-            self.selection = self.selections[0]
-        if self.there_are_filters():
-            buttonWiget.change_color(background='#f04209')
-        else:
-            buttonWiget.change_color(background='#09f042')
+    # def set_selection(self, selection, buttonWiget):
+    #     if selection in self.selections:
+    #         self.selection = selection
+    #         self.write_to_log('{} is selected'.format(selection))
+    #     elif type(selection) == type(Label()):
+    #         if self.animated == '':
+    #             self.animated = 'True'
+    #         elif self.animated == 'True':
+    #             self.animated = 'False'
+    #         elif self.animated == 'False':
+    #             self.animated = ''
+    #         self.selection = selection
+    #         self.write_to_log('{} is selected'.format(selection))
+    #         selection.config(text=self.animated)
+    #     else:
+    #         self.write_to_log('{} is not allowed'.format(selection))
+    #         self.selection = self.selections[0]
+    #     if self.there_are_filters():
+    #         buttonWiget.change_color(background='#f04209')
+    #     else:
+    #         buttonWiget.change_color(background='#09f042')
     
-    def reset_animated_label(self, label, defalttext=''):
-        self.animated = defalttext
-        label.labels[0].config(text=self.animated)
+    # def reset_animated_label(self, label, defalttext=''):
+    #     self.animated = defalttext
+    #     label.labels[0].config(text=self.animated)
 
-    def update_hours(self, inputbod, buttonWiget):
-        inp = inputbod.get(1.0, "end-1c")
-        self.write_to_log(inp)
-        try:
-            inp = int(inp)
-        except:
-            self.write_to_log('{} is not a number'.format(inp))
-            inp = 0
-        self.hours = inp
-        self.update_duration(buttonWiget)
+    # def update_hours(self, inputbod, buttonWiget):
+    #     inp = inputbod.get(1.0, "end-1c")
+    #     self.write_to_log(inp)
+    #     try:
+    #         inp = int(inp)
+    #     except:
+    #         self.write_to_log('{} is not a number'.format(inp))
+    #         inp = 0
+    #     self.hours = inp
+    #     self.update_duration(buttonWiget)
 
-    def update_minutes(self, inputbod, buttonWiget):
-        inp = inputbod.get(1.0, "end-1c")
-        self.hours_overflowm = 0
-        self.write_to_log(inp)
-        try:
-            inp = int(inp)
-        except:
-            self.write_to_log('{} is not a number'.format(inp))
-            inp = 0
-        # if inp >= 60:
-        #     self.hours_overflowm = int(inp/60)
-        #     self.minutes = inp - (60*self.hours_overflowm)
-        # else:
-        self.minutes = inp
-        self.hours_overflowm = 0
-        self.update_duration(buttonWiget)
+    # def update_minutes(self, inputbod, buttonWiget):
+    #     inp = inputbod.get(1.0, "end-1c")
+    #     self.hours_overflowm = 0
+    #     self.write_to_log(inp)
+    #     try:
+    #         inp = int(inp)
+    #     except:
+    #         self.write_to_log('{} is not a number'.format(inp))
+    #         inp = 0
+    #     # if inp >= 60:
+    #     #     self.hours_overflowm = int(inp/60)
+    #     #     self.minutes = inp - (60*self.hours_overflowm)
+    #     # else:
+    #     self.minutes = inp
+    #     self.hours_overflowm = 0
+    #     self.update_duration(buttonWiget)
 
-    def update_seconds(self, inputbod, buttonWiget):
-        inp = inputbod.get(1.0, "end-1c")
-        self.write_to_log(inp)
-        try:
-            inp = int(inp)
-        except:
-            self.write_to_log('{} is not a number'.format(inp))
-            inp = 0
-        self.seconds = inp
-        self.update_duration(buttonWiget)
+    # def update_seconds(self, inputbod, buttonWiget):
+    #     inp = inputbod.get(1.0, "end-1c")
+    #     self.write_to_log(inp)
+    #     try:
+    #         inp = int(inp)
+    #     except:
+    #         self.write_to_log('{} is not a number'.format(inp))
+    #         inp = 0
+    #     self.seconds = inp
+    #     self.update_duration(buttonWiget)
 
-    def update_all_time(self, inputbod, buttonWiget):
-        if (len(inputbod)==len(buttonWiget))and(type(inputbod)==type(buttonWiget))and(type(inputbod)==type([])):
-            for i in range(0, len(inputbod)):
-                inbo = inputbod[i].inputboxes[len(inputbod[i].inputboxes)-1]
-                widget = inputbod[i]
-                buwi = buttonWiget[i]
-                if i == 0:
-                    self.update_hours(inbo, buwi)
-                elif i == 1:
-                    self.update_minutes(inbo, buwi)
-                elif i == 2:
-                    self.update_seconds(inbo, buwi)
-                else:
-                    self.write_to_log(str(i) + 'This aint right')
-                widget.clear()
-        else:
-            self.write_to_log('Check again!')
-            exit(0)
+    # def update_all_time(self, inputbod, buttonWiget):
+    #     if (len(inputbod)==len(buttonWiget))and(type(inputbod)==type(buttonWiget))and(type(inputbod)==type([])):
+    #         for i in range(0, len(inputbod)):
+    #             inbo = inputbod[i].inputboxes[len(inputbod[i].inputboxes)-1]
+    #             widget = inputbod[i]
+    #             buwi = buttonWiget[i]
+    #             if i == 0:
+    #                 self.update_hours(inbo, buwi)
+    #             elif i == 1:
+    #                 self.update_minutes(inbo, buwi)
+    #             elif i == 2:
+    #                 self.update_seconds(inbo, buwi)
+    #             else:
+    #                 self.write_to_log(str(i) + 'This aint right')
+    #             widget.clear()
+    #     else:
+    #         self.write_to_log('Check again!')
+    #         exit(0)
 
-    def update_duration(self, buttonWiget):
-        self.duration = ((self.hours) * 60 * 60)
-        self.duration = self.duration + ((self.minutes) * 60)
-        self.duration = self.duration + self.seconds
-        if self.there_are_filters():
-            buttonWiget.change_color(background='#f04209')
-        else:
-            buttonWiget.change_color(background='#09f042')
+    # def update_duration(self, buttonWiget):
+    #     self.duration = ((self.hours) * 60 * 60)
+    #     self.duration = self.duration + ((self.minutes) * 60)
+    #     self.duration = self.duration + self.seconds
+    #     if self.there_are_filters():
+    #         buttonWiget.change_color(background='#f04209')
+    #     else:
+    #         buttonWiget.change_color(background='#09f042')
 
-    def update_comparator(self, comparator):
-        self.write_to_log(comparator)
-        self.comparator = comparator
-        self.range_selected = False
+    # def update_comparator(self, comparator):
+    #     self.write_to_log(comparator)
+    #     self.comparator = comparator
+    #     self.range_selected = False
 
-    def update_upper_comparator(self, comparator):
-        self.write_to_log(comparator)
-        self.comparator = '>='
-        self.upper_duration = self.duration
-        self.upper_comparator = comparator
-        self.range_selected = True
+    # def update_upper_comparator(self, comparator):
+    #     self.write_to_log(comparator)
+    #     self.comparator = '>='
+    #     self.upper_duration = self.duration
+    #     self.upper_comparator = comparator
+    #     self.range_selected = True
 
-    def update_lower_comparator(self, comparator):
-        self.write_to_log(comparator)
-        self.comparator = '>='
-        self.lower_duration = self.duration
-        self.lower_comparator = comparator
-        self.range_selected = True
+    # def update_lower_comparator(self, comparator):
+    #     self.write_to_log(comparator)
+    #     self.comparator = '>='
+    #     self.lower_duration = self.duration
+    #     self.lower_comparator = comparator
+    #     self.range_selected = True
 
-    def get_single_selection(self, box):
-        try:
-            try:
-                listbox = box.listboxess[len(box.listboxess)-1]
-                try:
-                    video = listbox.get(listbox.curselection())
-                except Exception as error:
-                    self.write_to_log(str(error)+ ' therefor I am returning \'\'')
-                    video = ''
-            except Exception as err:
-                self.write_to_log('here'+ str(err))
-                video = ''
-        except Exception as error:
-            self.write_to_log('Error:' + str(error))
-            index = self.generate_random_integer(0, len(self.dataframe))
-            path = self.get_value_at_cell(index, 'Path', self.dataframe)
-            name = self.get_value_at_cell(index, 'Filename', self.dataframe)
-            video = os.path.join(path, name)
-            self.write_to_log(video)
-        return video
+    # def get_single_selection(self, box):
+    #     try:
+    #         try:
+    #             listbox = box.listboxess[len(box.listboxess)-1]
+    #             try:
+    #                 video = listbox.get(listbox.curselection())
+    #             except Exception as error:
+    #                 self.write_to_log(str(error)+ ' therefor I am returning \'\'')
+    #                 video = ''
+    #         except Exception as err:
+    #             self.write_to_log('here'+ str(err))
+    #             video = ''
+    #     except Exception as error:
+    #         self.write_to_log('Error:' + str(error))
+    #         index = self.generate_random_integer(0, len(self.dataframe))
+    #         path = self.get_value_at_cell(index, 'Path', self.dataframe)
+    #         name = self.get_value_at_cell(index, 'Filename', self.dataframe)
+    #         video = os.path.join(path, name)
+    #         self.write_to_log(video)
+    #     return video
     
-    def move_file(self, filtered_listbox_widget, list_of_folders_widget):
-        video = self.get_single_selection(filtered_listbox_widget)
-        new_path = self.get_single_selection(list_of_folders_widget)
-        old_path, filename = os.path.split(video)
-        new_video = os.path.join(new_path, filename)
-        shutil.move(video, new_video)
-        self.dataframe = self.edit_dataframe(self.dataframe, filename, old_path, 'Path', new_path)
-        self.filtereddataframe = self.edit_dataframe(self.filtereddataframe, filename,
-                                                     old_path, 'Path', new_path)
-        self.dataframe.replace(float('nan'), '')
-        self.dataframe.replace(',nan,', '')
-        self.dataframe.to_csv(self.the_csv, index=False)
-        optionz = list_of_folders_widget.options
-        list_of_folders_widget.remove_everything()
-        list_of_folders_widget.populate_box(list_of_folders_widget.listboxess[0], optionz)
-        optionz = filtered_listbox_widget.options
-        optionz.remove(video)
-        optionz.append(new_video)
-        optionz.sort(key=str.lower)
-        filtered_listbox_widget.remove_everything()
-        filtered_listbox_widget.populate_box(filtered_listbox_widget.listboxess[0], optionz)
+    # def move_file(self, filtered_listbox_widget, list_of_folders_widget):
+    #     video = self.get_single_selection(filtered_listbox_widget)
+    #     new_path = self.get_single_selection(list_of_folders_widget)
+    #     old_path, filename = os.path.split(video)
+    #     new_video = os.path.join(new_path, filename)
+        # shutil.move(video, new_video)
+        # self.dataframe = self.edit_dataframe(self.dataframe, filename, old_path, 'Path', new_path)
+        # self.filtereddataframe = self.edit_dataframe(self.filtereddataframe, filename,
+        #                                              old_path, 'Path', new_path)
+        # self.dataframe.replace(float('nan'), '')
+        # self.dataframe.replace(',nan,', '')
+        # self.dataframe.to_csv(self.the_csv, index=False)
+        # optionz = list_of_folders_widget.options
+        # list_of_folders_widget.remove_everything()
+        # list_of_folders_widget.populate_box(list_of_folders_widget.listboxess[0], optionz)
+        # optionz = filtered_listbox_widget.options
+        # optionz.remove(video)
+        # optionz.append(new_video)
+        # optionz.sort(key=str.lower)
+        # filtered_listbox_widget.remove_everything()
+        # filtered_listbox_widget.populate_box(filtered_listbox_widget.listboxess[0], optionz)
 
     def get_value_at_cell_without_row(self, frame, filename, pathe, heading):
         rowI = self.get_row_index(frame, filename, pathe)
