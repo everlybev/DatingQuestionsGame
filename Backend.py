@@ -2032,16 +2032,6 @@ class BackendFuncs:
         print(string)
         logger.write(string + '\n')
         logger.close()
-
-    def get_duration(self, a_video):
-        try:
-            clip_info = MediaInfo.parse(a_video)
-            duration = (clip_info.tracks[0].duration) / 1000
-            return duration
-        except Exception as Error:
-            self.write2file('get_duration:\n'+str(a_video)+' is unplayable\n'+str(Error))
-            #exit(0)
-            return 0
         
     def add_general_genres(self, genres, path_and_file):
         genres = str(genres)
