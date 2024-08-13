@@ -3,7 +3,6 @@ from datetime import datetime
 import os
 #import json
 import time
-from pymediainfo import MediaInfo
 import subprocess
 import secrets
 import psutil
