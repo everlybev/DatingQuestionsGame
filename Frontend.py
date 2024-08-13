@@ -58,7 +58,7 @@ class Window(Tk):
 
         #Stats Label
         statsLabel = Label_Widget(self.root)
-        statsLabelText = 'Stats:\n                 BF                 GF\nScore:            0                 0\nSkips:            1                 1'
+        statsLabelText = 'Stats:\n                 BF                 GF\nScore:            000.0                 000.0\nSkips:            1                 1'
         statsLabel.add_widget(statsLabelText)
         good_size = False
         standard_font_size = 1
@@ -81,35 +81,6 @@ class Window(Tk):
         statsLabel.place_here(1,
                                int(.5*self.screenheight_in_pixels),
                                0, 0)
-        
-        #skip button
-        skipButton = Button_Widget(self.root)
-        skipButton.add_widget('Skip', self.backend.skip,
-                               multiargument=True, args=[statsLabel])
-        skipButton.place_here(int((7/32)*self.window_width), 
-                              int((11/18)*self.window_height), 
-                              0, 
-                              skipButton.height)
-
-        #answer button
-        answerButton = Button_Widget(self.root)
-        answerButton.add_widget('Answer', self.backend.answer,
-                                  multiargument=True,
-                                  args=[statsLabel])
-        answerButton.place_here(int((21/32)*self.window_width), 
-                              int((11/18)*self.window_height), 
-                              0, 
-                              answerButton.height)
-
-        #buy skip button
-        buySkipButton = Button_Widget(self.root)
-        buySkipButton.add_widget('Buy Skip', self.backend.buy_skip,
-                                  multiargument=True,
-                                  args=[statsLabel])
-        buySkipButton.place_here(int((14/32)*self.window_width), 
-                              int((14/18)*self.window_height), 
-                              0, 
-                              buySkipButton.height)
 
         #Names Label
         namesLabel = Label_Widget(self.root)
@@ -127,6 +98,42 @@ class Window(Tk):
         BFInput.add_widget(max(len('Evan S. Everett'), len('Laura Parrell')), 1)
         BFInput.place_here(43, GFInput.y-(GFInput.height/2)-BFInput.height, 0, -1)
 
+        #Qustion Label
+        QustionLable = Label_Widget(self.root)
+        QustionLable.add_widget('Please enter your names, hold hands, look into each other eys, and press any buton to begin.')
+        QustionLable.change_font_size(standard_font_size)
+        QustionLable.place_here(int((1/32)*self.window_width), 
+                             int((statsLabel.y+namesLabel.y)/2), 0, 0)
+        
+        #skip button
+        skipButton = Button_Widget(self.root)
+        skipButton.add_widget('Skip', self.backend.skip,
+                               multiargument=True, args=[statsLabel, BFInput, GFInput, QustionLable])
+        skipButton.place_here(int((7/32)*self.window_width), 
+                              int((11/18)*self.window_height), 
+                              0, 
+                              skipButton.height)
+
+        #answer button
+        answerButton = Button_Widget(self.root)
+        answerButton.add_widget('Answer', self.backend.answer,
+                                  multiargument=True,
+                                  args=[statsLabel, BFInput, GFInput, QustionLable])
+        answerButton.place_here(int((21/32)*self.window_width), 
+                              int((11/18)*self.window_height), 
+                              0, 
+                              answerButton.height)
+
+        #buy skip button
+        buySkipButton = Button_Widget(self.root)
+        buySkipButton.add_widget('Buy Skip', self.backend.buy_skip,
+                                  multiargument=True,
+                                  args=[statsLabel, BFInput, GFInput, QustionLable])
+        buySkipButton.place_here(int((14/32)*self.window_width), 
+                              int((14/18)*self.window_height), 
+                              0, 
+                              buySkipButton.height)
+
         #Rulez Label
         rulesLabel = Label_Widget(self.root)
         rulesLabel.add_widget(self.backend.rulez)
@@ -135,13 +142,6 @@ class Window(Tk):
         rulesLabel.place_here(int((26/32)*self.window_width),
                                int(.5*(self.window_height-rulesLabel.height)),
                                0, -1)
-
-        #Qustion Label
-        QustionLable = Label_Widget(self.root)
-        QustionLable.add_widget('Please enter your names, hold hands, look into each other eys, and press any buton to begin.')
-        QustionLable.change_font_size(standard_font_size)
-        QustionLable.place_here(int((1/32)*self.window_width), 
-                             int((statsLabel.y+namesLabel.y)/2), 0, 0)
 
     def display_app(self):
         self.set_window_dimensions(self.window_width, self.window_height)

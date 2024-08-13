@@ -16,6 +16,7 @@ from PIL import Image, ImageTk
 from cv2 import imwrite
 from cv2 import CAP_PROP_FPS
 from cv2 import CAP_PROP_POS_FRAMES
+import ctypes
 
 class BackendFuncs:
     def __init__(self):
@@ -173,9 +174,19 @@ class BackendFuncs:
             # 'What is a fantasy you've never shared with anyone?
 
         ]
+        self.bf_total_questions = 0
+        self.gf_total_questions = 0
+        self.bf_answered_questions = 0
+        self.gf_answered_questions = 0
         self.BF_score = 0
         self.GF_score = 0
-        self.current_turn = self.generate_random_integer(0, 1)
+        self.BF_skips = 1
+        self.GF_skips = 1
+        self.BF_number_of_bought_skips = 0
+        self.GF_number_of_bought_skips = 0
+        u = ctypes.windll.user32
+        [self.screenwidth_in_pixels, self.screenheight_in_pixels] = [u.GetSystemMetrics(0), u.GetSystemMetrics(1)]
+        self.player_index = self.generate_random_integer(1, 4) % 2
         self.bf_name = ''
         self.gf_name = ' '
         self.rulez = 'Rules:\n1. Players must alternate\nturns.  The first player will\nbe determined at random.\n\n'
@@ -187,23 +198,165 @@ class BackendFuncs:
         self.rulez = self.rulez + '6. Skips can be bought after\nanswering 3 questions.\n\n'
         self.rulez = self.rulez + '7. A player may only hold 3\nskips at once.'
         self.game_started = False
+        self.bf_turns_of_accural = 0
+        self.gf_turns_of_accural = 0
+        self.bf_turns_of_purchase = 0
+        self.gf_turns_of_purchase = 0
 
-    def start_game(self, bf_text_widget, gf_text_widget):
+    def start_game(self, bf_text_widget, gf_text_widget, questions_label_widget):
         if self.game_started != False:
             pass
         else:
+            self.game_started = True
             self.bf_name = bf_text_widget.get_text_input()
             self.gf_name = gf_text_widget.get_text_input()
+            self.players = [
+                [self.gf_name, self.GF_score, self.GF_skips, self.gf_answered_questions, self.gf_total_questions,
+                 'female', self.GF_number_of_bought_skips, self.gf_turns_of_accural, self.gf_turns_of_purchase],
+                [self.bf_name, self.BF_score, self.BF_skips, self.bf_answered_questions, self.bf_total_questions,
+                 'male', self.BF_number_of_bought_skips, self.bf_turns_of_accural, self.bf_turns_of_purchase]
+            ]
+            self.active_player_info = self.players[self.player_index]
+            question_index = self.generate_random_integer(0, len(self.questions)-1)
+            question = self.questions[question_index]
+            self.questions.pop(question_index)
+            questions_label_widget.change_text(question)
+            if self.active_player_info[5] == 'male':
+                questions_label_widget.labels[0].config(fg='#0999ff')#fg_color='0999ff'
+            elif self.active_player_info[5] == 'female':
+                questions_label_widget.labels[0].config(fg='#ff8080')#fg_color='ff8080'
+            self.current_turn = 0
         #exit()
+
+    def move_to_next_round(self, questions_label_widget):
+        self.toggle_player_index()
+        self.active_player_info = self.players[self.player_index]
+        question_index = self.generate_random_integer(0, len(self.questions)-1)
+        question = self.questions[question_index]
+        self.questions.pop(question_index)
+        questions_label_widget.change_text(question)
+        if self.active_player_info[5] == 'male':
+            questions_label_widget.labels[0].config(fg='#0999ff')#fg_color='0999ff'
+        elif self.active_player_info[5] == 'female':
+            questions_label_widget.labels[0].config(fg='#ff8080')#fg_color='ff8080'
     
-    def skip(self, stats_label_widget):
-        pass
+    def toggle_player_index(self):
+        if self.player_index == 1:
+            self.player_index = 0
+        elif self.player_index == 0:
+            self.player_index = 1
+        elif self.player_index % 2 == 1:
+            self.player_index = 0
+        else:
+            self.player_index = 1
 
-    def answer(self, stats_label_widget):
-        pass
+    def update_stats(self, stats_label_widget):
+        stats = 'Stats:\n                 BF                 GF\nScore:            {}                 {}\nSkips:            {}                 {}'.format(
+            round(self.BF_score, 1), round(self.GF_score, 1), self.BF_skips, self.GF_skips
+        )
+        stats_label_widget.change_text(stats)
+        stats_label_widget.place_here(1,
+                               int(.5*self.screenheight_in_pixels),
+                               0, 0)
 
-    def buy_skip(self, stats_label_widget):
-        pass
+    def update_player_info(self):
+        self.GF_score = self.players[0][1]
+        self.GF_skips = self.players[0][2]
+        self.gf_answered_questions = self.players[0][3]
+        self.gf_total_questions = self.players[0][4]
+        self.GF_number_of_bought_skips = self.players[0][6]
+        self.gf_turns_of_accural = self.players[0][7]
+        self.gf_turns_of_purchase = self.players[0][8]
+        self.BF_score = self.players[1][1]
+        self.BF_skips = self.players[1][2]
+        self.bf_answered_questions = self.players[1][3]
+        self.bf_total_questions = self.players[1][4]
+        self.BF_number_of_bought_skips = self.players[1][6]
+        self.bf_turns_of_accural = self.players[1][7]
+        self.bf_turns_of_purchase = self.players[1][8]
+        self.players = [
+                [self.gf_name, self.GF_score, self.GF_skips, self.gf_answered_questions, self.gf_total_questions,
+                 'female', self.GF_number_of_bought_skips, self.gf_turns_of_accural, self.gf_turns_of_purchase],
+                [self.bf_name, self.BF_score, self.BF_skips, self.bf_answered_questions, self.bf_total_questions,
+                 'male', self.BF_number_of_bought_skips, self.bf_turns_of_accural, self.bf_turns_of_purchase]
+            ]
+    
+    def skip(self, stats_label_widget, bf_text_widget, gf_text_widget, questions_label_widget):
+        if self.game_started == False:
+            self.start_game(bf_text_widget, gf_text_widget, questions_label_widget)
+        else:
+            #[self.gf_name, self.GF_score, self.GF_skips, self.gf_answered_questions, self.gf_total_questions, 'female', bought_skips]
+            print('skipping')
+            if self.players[self.player_index][2] > 0:
+                print(self.players[self.player_index][2])
+                self.players[self.player_index][2] =  self.players[self.player_index][2] - 1
+                self.players[self.player_index][4] =  self.players[self.player_index][4] + 1
+                self.players[self.player_index][1] =  self.calculate_score(self.players[self.player_index][1],
+                                                                           self.players[self.player_index][3],
+                                                                           self.players[self.player_index][4],
+                                                                           self.players[self.player_index][6])
+                print(self.players[self.player_index][2])
+                self.update_player_info()
+                self.update_stats(stats_label_widget)
+                self.move_to_next_round(questions_label_widget)
+            else:
+                print('{} does not have enough.  Must buy')
+
+    def answer(self, stats_label_widget, bf_text_widget, gf_text_widget, questions_label_widget):
+        # [self.bf_name, self.BF_score, self.BF_skips, self.bf_answered_questions, self.bf_total_questions,
+        #          'male', self.BF_number_of_bought_skips, self.bf_turns_of_accural, self.bf_turns_of_purchase]
+        if self.game_started == False:
+            self.start_game(bf_text_widget, gf_text_widget, questions_label_widget)
+        else:
+            self.players[self.player_index][4] =  self.players[self.player_index][4] + 1
+            self.players[self.player_index][3] =  self.players[self.player_index][3] + 1
+            self.players[self.player_index][1] =  self.calculate_score(self.players[self.player_index][1],
+                                                                           self.players[self.player_index][3],
+                                                                           self.players[self.player_index][4],
+                                                                           self.players[self.player_index][6])
+            self.accrue_skip()
+            self.update_stats(stats_label_widget)
+            self.move_to_next_round(questions_label_widget)
+            
+    def accrue_skip(self):
+        if (self.players[self.player_index][2] < 3) and (self.players[self.player_index][7] >= 5):
+            self.players[self.player_index][2] = self.players[self.player_index][2] + 1
+            self.players[self.player_index][7] = 0
+        elif (self.players[self.player_index][2] >= 3) and (self.players[self.player_index][7] >= 5):
+            self.players[self.player_index][2] = 3
+            self.players[self.player_index][7] = 0
+        else:
+            self.players[self.player_index][7] = self.players[self.player_index][7] + 1
+        if self.players[self.player_index][8] < 3:
+            self.players[self.player_index][8] = self.players[self.player_index][8] + 1
+        else:
+            self.players[self.player_index][8] = 3
+        self.update_player_info()
+
+    def buy_skip(self, stats_label_widget, bf_text_widget, gf_text_widget, questions_label_widget):
+        if self.game_started == False:
+            self.start_game(bf_text_widget, gf_text_widget, questions_label_widget)
+        else:
+            if (self.players[self.player_index][8] >= 3) and (self.players[self.player_index][2] < 3):
+                self.players[self.player_index][2] = self.players[self.player_index][2] + 1
+                self.players[self.player_index][8] = 0
+                self.update_player_info()
+                self.players[self.player_index][1] =  self.calculate_score(self.players[self.player_index][1],
+                                                                           self.players[self.player_index][3],
+                                                                           self.players[self.player_index][4],
+                                                                           self.players[self.player_index][6])
+                self.update_stats(stats_label_widget)
+            elif (self.players[self.player_index][8] >= 3) and (self.players[self.player_index][2] >= 3):
+                pass
+            else:
+                pass
+
+
+    def calculate_score(self, current_score, answered_questions, total_questions, skips_bought):
+        if total_questions == 0:
+            return 0
+        else:
+            return max(current_score, (answered_questions*5)+((answered_questions/total_questions)*3)+(2*skips_bought))
     
     def alphabatize_txt_list(self, text_doc_name, new_text_doc_name=False):
         contents = self.get_list_of_contents(text_doc_name)
@@ -1105,7 +1258,7 @@ class BackendFuncs:
 
     def generate_random_integer(self, minimum, maximum):
         secretsGenerator = secrets.SystemRandom()
-        return secretsGenerator.randint(minimum, maximum-1)
+        return secretsGenerator.randint(minimum, maximum)
     
     def clear_everything(self, box, labels, buttonWiget, textboxes=[], other_list_boxes=[], sort_buttons=[],
                          hours_lable=1):
