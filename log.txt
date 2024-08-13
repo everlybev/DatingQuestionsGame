@@ -4678,3 +4678,558 @@ filtered
 08/11/2024 14:11:18
 >
 
+08/12/2024 20:07:32
+init complete
+
+08/12/2024 20:07:32
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:08:24
+init complete
+
+08/12/2024 20:08:24
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:10:15
+init complete
+
+08/12/2024 20:10:15
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:11:30
+init complete
+
+08/12/2024 20:11:30
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:12:39
+init complete
+
+08/12/2024 20:12:39
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:13:37
+init complete
+
+08/12/2024 20:13:37
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:13:37
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:14:50
+init complete
+
+08/12/2024 20:14:50
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:14:50
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:15:29
+init complete
+
+08/12/2024 20:15:29
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:15:29
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:16:06
+init complete
+
+08/12/2024 20:16:06
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:16:06
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:16:55
+init complete
+
+08/12/2024 20:16:55
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:16:55
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:19:24
+init complete
+
+08/12/2024 20:19:24
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:19:24
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:19:46
+init complete
+
+08/12/2024 20:19:46
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:19:46
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:27:08
+init complete
+
+08/12/2024 20:27:08
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:27:08
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:27:56
+init complete
+
+08/12/2024 20:27:56
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:27:56
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:28:56
+init complete
+
+08/12/2024 20:28:56
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:28:56
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:30:24
+init complete
+
+08/12/2024 20:30:24
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:30:24
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:30:43
+init complete
+
+08/12/2024 20:30:43
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:30:43
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:37:27
+init complete
+
+08/12/2024 20:37:27
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:37:27
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 20:43:51
+init complete
+
+08/12/2024 20:43:51
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 20:43:51
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:04:02
+init complete
+
+08/12/2024 21:04:02
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:04:02
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:06:21
+init complete
+
+08/12/2024 21:06:21
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:06:22
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:06:48
+init complete
+
+08/12/2024 21:06:48
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:06:48
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:07:47
+init complete
+
+08/12/2024 21:07:47
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:07:47
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:08:12
+init complete
+
+08/12/2024 21:08:12
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:08:12
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:08:29
+init complete
+
+08/12/2024 21:08:29
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:08:29
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:10:25
+init complete
+
+08/12/2024 21:10:25
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:10:25
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:10:49
+init complete
+
+08/12/2024 21:10:49
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:10:49
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:12:04
+init complete
+
+08/12/2024 21:12:04
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:12:04
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:12:37
+init complete
+
+08/12/2024 21:12:37
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:12:37
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:13:03
+init complete
+
+08/12/2024 21:13:03
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:13:03
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:13:22
+init complete
+
+08/12/2024 21:13:22
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:13:22
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:18:19
+init complete
+
+08/12/2024 21:18:19
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:18:19
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:19:08
+init complete
+
+08/12/2024 21:19:08
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:19:23
+init complete
+
+08/12/2024 21:19:23
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:19:23
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:19:38
+init complete
+
+08/12/2024 21:19:38
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:19:38
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:23:08
+init complete
+
+08/12/2024 21:23:08
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:23:08
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:36:13
+init complete
+
+08/12/2024 21:36:13
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:36:13
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:37:35
+init complete
+
+08/12/2024 21:37:35
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:37:35
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:38:01
+init complete
+
+08/12/2024 21:38:01
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:38:01
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:38:52
+init complete
+
+08/12/2024 21:38:52
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:38:52
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:39:10
+init complete
+
+08/12/2024 21:39:10
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:39:10
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:40:26
+init complete
+
+08/12/2024 21:40:26
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:40:26
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:40:51
+init complete
+
+08/12/2024 21:40:51
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:40:51
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:41:18
+init complete
+
+08/12/2024 21:41:18
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:41:18
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:41:34
+init complete
+
+08/12/2024 21:41:34
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:41:34
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:42:09
+init complete
+
+08/12/2024 21:42:09
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:42:09
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:42:46
+init complete
+
+08/12/2024 21:42:46
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:42:46
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:43:12
+init complete
+
+08/12/2024 21:43:12
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:43:12
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:43:38
+init complete
+
+08/12/2024 21:43:38
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:43:38
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:44:21
+init complete
+
+08/12/2024 21:44:21
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:44:21
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:44:38
+init complete
+
+08/12/2024 21:44:38
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:44:38
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:45:13
+init complete
+
+08/12/2024 21:45:13
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:45:13
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:45:31
+init complete
+
+08/12/2024 21:45:31
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:45:32
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:45:49
+init complete
+
+08/12/2024 21:45:49
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:45:49
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:46:16
+init complete
+
+08/12/2024 21:46:16
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:46:16
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:46:34
+init complete
+
+08/12/2024 21:46:34
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:46:34
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:53:35
+init complete
+
+08/12/2024 21:53:35
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:54:07
+init complete
+
+08/12/2024 21:54:07
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:54:08
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:54:32
+init complete
+
+08/12/2024 21:54:32
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:54:33
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:55:59
+init complete
+
+08/12/2024 21:55:59
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:55:59
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:56:58
+init complete
+
+08/12/2024 21:56:58
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:56:58
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:58:03
+init complete
+
+08/12/2024 21:58:03
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:58:03
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 21:58:18
+init complete
+
+08/12/2024 21:58:18
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 21:58:18
+screen width is 1280 height is 720, window width is 1216 height is 684
+
+08/12/2024 22:00:49
+init complete
+
+08/12/2024 22:00:49
+screen width is 1280 height is 720, window width is 1216.0 height is 684.0
+
+08/12/2024 22:00:49
+screen width is 1280 height is 720, window width is 1216 height is 684
+

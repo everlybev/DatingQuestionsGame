@@ -176,15 +176,34 @@ class BackendFuncs:
         self.BF_score = 0
         self.GF_score = 0
         self.current_turn = self.generate_random_integer(0, 1)
-        self.rulez = '1. Players must alternate turns.  The first player will be determined at random.\n'
-        self.rulez = self.rulez + '2. This is meant to build your relationship.  As such all answers MUST be made while holding hands '
-        self.rulez = self.rulez + 'and making full eye contact.\n'
-        self.rulez = self.rulez + '3. Players can use their skips whenever they choose as long as they have skips.\n'
-        self.rulez = self.rulez + '4. Players can accrue skips at a rate of 1 skip per 5 answered questions.\n'
-        self.rulez = self.rulez + '5. Skips can be bought by giving your partner a passionate kiss if it is your turn.\n'
-        self.rulez = self.rulez + '6. Skips can be bought after answering 3 questions.\n'
-        self.rulez = self.rulez + '7. A player may only hold 3 skips at once.'
-            #exit()
+        self.bf_name = ''
+        self.gf_name = ' '
+        self.rulez = 'Rules:\n1. Players must alternate\nturns.  The first player will\nbe determined at random.\n\n'
+        self.rulez = self.rulez + '2. This is meant to build\nyour relationship.  As such\nall answers MUST be made\nwhileholding hands '
+        self.rulez = self.rulez + 'and\nmaking full eye contact.\n\n'
+        self.rulez = self.rulez + '3. Players can use their\nskips whenever they choose\nas long as they have skips.\n\n'
+        self.rulez = self.rulez + '4. Players can accrue skips\nat a rate of 1 skip per 5\nanswered questions.\n\n'
+        self.rulez = self.rulez + '5. Skips can be bought by\ngiving your partner a\npassionate kiss if it is your\nturn.\n\n'
+        self.rulez = self.rulez + '6. Skips can be bought after\nanswering 3 questions.\n\n'
+        self.rulez = self.rulez + '7. A player may only hold 3\nskips at once.'
+        self.game_started = False
+
+    def start_game(self, bf_text_widget, gf_text_widget):
+        if self.game_started != False:
+            pass
+        else:
+            self.bf_name = bf_text_widget.get_text_input()
+            self.gf_name = gf_text_widget.get_text_input()
+        #exit()
+    
+    def skip(self, stats_label_widget):
+        pass
+
+    def answer(self, stats_label_widget):
+        pass
+
+    def buy_skip(self, stats_label_widget):
+        pass
     
     def alphabatize_txt_list(self, text_doc_name, new_text_doc_name=False):
         contents = self.get_list_of_contents(text_doc_name)

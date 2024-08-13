@@ -257,6 +257,23 @@ class Label_Widget():
         self.labels[0].config(font=("Arial", font_size, "bold"))
         self.width = self.labels[len(self.labels)-1].winfo_reqwidth()
         self.height = self.labels[len(self.labels)-1].winfo_reqheight()
+    
+    def change_width(self, w_in_pixles):
+        big_enough = False
+        size = 1
+        while not big_enough:
+            self.labels[0].config(width=size)
+            self.width = self.labels[len(self.labels)-1].winfo_reqwidth()
+            if self.width == w_in_pixles:
+                big_enough = True
+            elif (self.width > w_in_pixles) and (size == 1):
+                big_enough = True
+            elif (self.width > w_in_pixles) and (size > 1):
+                self.labels[0].config(width=size-1)
+                self.width = self.labels[len(self.labels)-1].winfo_reqwidth()
+                big_enough = True
+            else:
+                size = size + 1
 
 class Listbox_widget():
     def __init__(self, tk):
