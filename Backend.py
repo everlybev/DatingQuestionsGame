@@ -5,16 +5,12 @@ import os
 import time
 import subprocess
 import secrets
-import psutil
 from tkinter import Label
 from tkinter import Tk
 from Widgets import Label_Widget
 from Widgets import Listbox_widget
 import shutil
 from PIL import Image, ImageTk
-from cv2 import imwrite
-from cv2 import CAP_PROP_FPS
-from cv2 import CAP_PROP_POS_FRAMES
 import ctypes
 
 class BackendFuncs:
@@ -1171,26 +1167,6 @@ class BackendFuncs:
         else:
             self.write_to_log('this should not be printed')
             return False
-
-    def check_if_application_is_open(self, app):
-        processName = app
-        '''
-        Check if there is any running process that
-        contains the givenname processName.
-        '''
-        #Iterate over the all the running process
-        for proc in psutil.process_iter():
-            #print(proc.name())
-            try:
-                # Check if process name contains the given name string.
-                if processName.lower() in proc.name().lower():
-                    self.write_to_log('Application is open')
-                    return True
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                pass
-        #write2file('Application is closed')
-        self.write_to_log('application is open return boolean = False')
-        return False
     
     def move_the_file(self, the_file_to_be_moved, old_folder, new_folder='unused',
                       list_of_folders_widget='i', filtered_listbox_widget='j'):
